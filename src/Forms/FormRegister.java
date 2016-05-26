@@ -5,6 +5,15 @@
  */
 package Forms;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jourdanrodrigues
@@ -27,21 +36,310 @@ public class FormRegister extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        TopLabel = new javax.swing.JLabel();
+        NameLabel = new javax.swing.JLabel();
+        NameTextField = new javax.swing.JTextField();
+        EmailLabel = new javax.swing.JLabel();
+        EmailTextField = new javax.swing.JTextField();
+        CPFLabel = new javax.swing.JLabel();
+        CPFTextField = new javax.swing.JTextField();
+        PhoneLabel = new javax.swing.JLabel();
+        PhoneTextField = new javax.swing.JTextField();
+        RGLabel = new javax.swing.JLabel();
+        RGTextField = new javax.swing.JTextField();
+        AddressLabel = new javax.swing.JLabel();
+        AddressTextField = new javax.swing.JTextField();
+        AccessNameLabel = new javax.swing.JLabel();
+        AccessNameTextField = new javax.swing.JTextField();
+        PasswordLabel = new javax.swing.JLabel();
+        PasswordField = new javax.swing.JPasswordField();
+        PasswordConfirmationLabel = new javax.swing.JLabel();
+        PasswordConfirmationField = new javax.swing.JPasswordField();
+        RegisterButton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        TopLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TopLabel.setText("CADASTRO");
+
+        NameLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        NameLabel.setText("NOME");
+
+        NameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NameTextFieldActionPerformed(evt);
+            }
+        });
+
+        EmailLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        EmailLabel.setText("EMAIL");
+
+        EmailTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmailTextFieldActionPerformed(evt);
+            }
+        });
+
+        CPFLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        CPFLabel.setText("CPF");
+
+        CPFTextField.setToolTipText("Somente números");
+        CPFTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CPFTextFieldActionPerformed(evt);
+            }
+        });
+
+        PhoneLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        PhoneLabel.setText("TELEFONE");
+
+        PhoneTextField.setToolTipText("Somente números");
+        PhoneTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PhoneTextFieldActionPerformed(evt);
+            }
+        });
+
+        RGLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        RGLabel.setText("RG");
+
+        RGTextField.setToolTipText("Somente números");
+        RGTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RGTextFieldActionPerformed(evt);
+            }
+        });
+
+        AddressLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        AddressLabel.setText("ENDEREÇO");
+
+        AddressTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddressTextFieldActionPerformed(evt);
+            }
+        });
+
+        AccessNameLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        AccessNameLabel.setText("NOME DE ACESSO");
+
+        AccessNameTextField.setToolTipText("Seu nome de usuário");
+        AccessNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AccessNameTextFieldActionPerformed(evt);
+            }
+        });
+
+        PasswordLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        PasswordLabel.setText("SENHA");
+
+        PasswordConfirmationLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        PasswordConfirmationLabel.setText("A SENHA, DE NOVO");
+
+        RegisterButton.setText("CADASTRAR");
+        RegisterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegisterButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(224, 224, 224)
+                .addComponent(TopLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(NameLabel)
+                            .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(EmailLabel)
+                            .addComponent(EmailTextField)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(CPFTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CPFLabel))
+                            .addGap(14, 14, 14)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(PhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(PhoneLabel)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(RGTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(RGLabel))
+                            .addGap(14, 14, 14)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(AddressLabel)
+                                .addComponent(AddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(AccessNameTextField)
+                                .addComponent(AccessNameLabel)
+                                .addComponent(RegisterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(14, 14, 14)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(PasswordLabel)
+                                .addComponent(PasswordConfirmationLabel)
+                                .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(PasswordConfirmationField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(TopLabel)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NameLabel)
+                    .addComponent(EmailLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CPFLabel)
+                    .addComponent(PhoneLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CPFTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RGLabel)
+                    .addComponent(AddressLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RGTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AccessNameLabel)
+                    .addComponent(PasswordLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AccessNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(PasswordConfirmationLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PasswordConfirmationField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(RegisterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NameTextFieldActionPerformed
+
+    private void EmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EmailTextFieldActionPerformed
+
+    private void CPFTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CPFTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CPFTextFieldActionPerformed
+
+    private void PhoneTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PhoneTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PhoneTextFieldActionPerformed
+
+    private void RGTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RGTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RGTextFieldActionPerformed
+
+    private void AddressTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddressTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddressTextFieldActionPerformed
+
+    private void AccessNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccessNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AccessNameTextFieldActionPerformed
+
+    private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
+
+        String cpf = CPFTextField.getText();
+        char[] password = PasswordField.getPassword();
+        String passwordString = new String(password);
+        String email = EmailTextField.getText();
+        String phone = PhoneTextField.getText();
+        String rg = RGTextField.getText();
+        String userName = NameTextField.getText();
+        String address = AddressTextField.getText();
+        String accessName = AccessNameTextField.getText();
+        
+        if (cpf.isEmpty() ||
+                userName.isEmpty() ||
+                passwordString.isEmpty() ||
+                email.isEmpty() ||
+                phone.isEmpty() ||
+                rg.isEmpty() ||
+                address.isEmpty() ||
+                accessName.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios!");
+            return;
+        }
+        
+        
+        if (!Arrays.equals(password, PasswordConfirmationField.getPassword())) {
+            JOptionPane.showMessageDialog(null, "Senhas não conferem!");
+            return;
+        }
+
+        // RegEx for email
+        Matcher m = Pattern.compile("[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}").matcher(email);
+        if (!m.find()) {
+            JOptionPane.showMessageDialog(null, "Email inválido!");
+            return;
+        }
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Poo2Homework", "root", "");
+            
+            String query = "insert into Usuario "
+                    + "(nome, email, cpf, telefone, rg, endereco, login, senha)"
+                    + " values (?,?,?,?,?,?,?,?)";
+            
+            PreparedStatement stmt = con.prepareStatement(query);
+            
+            stmt.setString(1, userName);
+            stmt.setString(2, email);
+            stmt.setString(3, cpf);
+            stmt.setString(4, phone);
+            stmt.setString(5, rg);
+            stmt.setString(6, address);
+            stmt.setString(7, accessName);
+            stmt.setString(8, passwordString);
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Usuário \"" + userName + "\" cadastrado com sucesso!");
+            new FormClientList().setVisible(true);
+            
+            stmt.close();
+            con.close();
+            dispose();
+            
+        }
+        catch (SQLException | ClassNotFoundException ex) {
+           JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex);
+        }
+
+    }//GEN-LAST:event_RegisterButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +377,25 @@ public class FormRegister extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AccessNameLabel;
+    private javax.swing.JTextField AccessNameTextField;
+    private javax.swing.JLabel AddressLabel;
+    private javax.swing.JTextField AddressTextField;
+    private javax.swing.JLabel CPFLabel;
+    private javax.swing.JTextField CPFTextField;
+    private javax.swing.JLabel EmailLabel;
+    private javax.swing.JTextField EmailTextField;
+    private javax.swing.JLabel NameLabel;
+    private javax.swing.JTextField NameTextField;
+    private javax.swing.JPasswordField PasswordConfirmationField;
+    private javax.swing.JLabel PasswordConfirmationLabel;
+    private javax.swing.JPasswordField PasswordField;
+    private javax.swing.JLabel PasswordLabel;
+    private javax.swing.JLabel PhoneLabel;
+    private javax.swing.JTextField PhoneTextField;
+    private javax.swing.JLabel RGLabel;
+    private javax.swing.JTextField RGTextField;
+    private javax.swing.JButton RegisterButton;
+    private javax.swing.JLabel TopLabel;
     // End of variables declaration//GEN-END:variables
 }
