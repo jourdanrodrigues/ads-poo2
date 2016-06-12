@@ -5,17 +5,38 @@
  */
 package Forms;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author FTN - Alunos
+ * @author Jourdan Rodrigues
  */
 public class FormClientRegister extends javax.swing.JFrame {
+    String userName;
+    String from;
+    int isManager;
 
     /**
-     * Creates new form FormPrincipal
+     * Creates new form FormClientRegister
      */
     public FormClientRegister() {
         initComponents();
+    }
+
+    public FormClientRegister(String userName, int isManager, String from) {
+        this.userName = userName;
+        this.isManager = isManager;
+        this.from = from;
+        
+        initComponents();
+        
+        UserNameLabel.setText(userName + ".");
     }
 
     /**
@@ -27,67 +48,348 @@ public class FormClientRegister extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        TopLabel = new javax.swing.JLabel();
+        FullNameLabel = new javax.swing.JLabel();
+        NameTextField = new javax.swing.JTextField();
+        EmailLabel = new javax.swing.JLabel();
+        EmailTextField = new javax.swing.JTextField();
+        CPFLabel = new javax.swing.JLabel();
+        CPFTextField = new javax.swing.JTextField();
+        PhoneLabel = new javax.swing.JLabel();
+        PhoneTextField = new javax.swing.JTextField();
+        RGLabel = new javax.swing.JLabel();
+        RGTextField = new javax.swing.JTextField();
+        CityLabel = new javax.swing.JLabel();
+        CityTextField = new javax.swing.JTextField();
+        StateProvinceLabel = new javax.swing.JLabel();
+        StateProvinceTextField = new javax.swing.JTextField();
+        CNHLabel = new javax.swing.JLabel();
+        RegisterButton = new javax.swing.JButton();
+        CNHTextField = new javax.swing.JTextField();
+        BackButton = new javax.swing.JButton();
+        UserNameLabel = new javax.swing.JLabel();
+        LogoutButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("CADASTRO");
+        TopLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TopLabel.setText("CADASTRO DE CLIENTE");
 
-        jMenuItem1.setText("Cliente");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        FullNameLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        FullNameLabel.setText("NOME COMPLETO");
+
+        NameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                NameTextFieldActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu1);
+        EmailLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        EmailLabel.setText("EMAIL");
 
-        jMenu2.setText("CONSULTA");
-
-        jMenuItem2.setText("Por código");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        EmailTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                EmailTextFieldActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu2);
+        CPFLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        CPFLabel.setText("CPF");
 
-        setJMenuBar(jMenuBar1);
+        CPFTextField.setToolTipText("Somente números");
+        CPFTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CPFTextFieldActionPerformed(evt);
+            }
+        });
+
+        PhoneLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        PhoneLabel.setText("TELEFONE");
+
+        PhoneTextField.setToolTipText("Somente números");
+        PhoneTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PhoneTextFieldActionPerformed(evt);
+            }
+        });
+
+        RGLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        RGLabel.setText("RG");
+
+        RGTextField.setToolTipText("Somente números");
+        RGTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RGTextFieldActionPerformed(evt);
+            }
+        });
+
+        CityLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        CityLabel.setText("CIDADE");
+
+        CityTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CityTextFieldActionPerformed(evt);
+            }
+        });
+
+        StateProvinceLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        StateProvinceLabel.setText("ESTADO");
+
+        StateProvinceTextField.setToolTipText("Seu nome de usuário");
+        StateProvinceTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StateProvinceTextFieldActionPerformed(evt);
+            }
+        });
+
+        CNHLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        CNHLabel.setText("CNH");
+
+        RegisterButton.setText("CADASTRAR");
+        RegisterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegisterButtonActionPerformed(evt);
+            }
+        });
+
+        CNHTextField.setToolTipText("Seu nome de usuário");
+        CNHTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CNHTextFieldActionPerformed(evt);
+            }
+        });
+
+        BackButton.setText("Voltar");
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackButtonActionPerformed(evt);
+            }
+        });
+
+        UserNameLabel.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
+        UserNameLabel.setText("Fulano de tal.");
+
+        LogoutButton.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
+        LogoutButton.setText("Logout");
+        LogoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(FullNameLabel)
+                                .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(EmailLabel)
+                                .addComponent(EmailTextField)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CPFTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CPFLabel))
+                                .addGap(14, 14, 14)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(PhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(PhoneLabel)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(RGTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(RGLabel))
+                                .addGap(14, 14, 14)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CityLabel)
+                                    .addComponent(CityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(StateProvinceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(StateProvinceLabel))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CNHLabel)
+                            .addComponent(CNHTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(RegisterButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(BackButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(UserNameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LogoutButton))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TopLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BackButton)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(LogoutButton)
+                        .addComponent(UserNameLabel)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TopLabel)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FullNameLabel)
+                    .addComponent(EmailLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CPFLabel)
+                    .addComponent(PhoneLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CPFTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RGLabel)
+                    .addComponent(CityLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RGTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(StateProvinceLabel)
+                    .addComponent(CNHLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(StateProvinceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CNHTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(RegisterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        
-        FormLogin fc = new FormLogin();
-        fc.setVisible(true);
-        
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NameTextFieldActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void EmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EmailTextFieldActionPerformed
+
+    private void CPFTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CPFTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CPFTextFieldActionPerformed
+
+    private void PhoneTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PhoneTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PhoneTextFieldActionPerformed
+
+    private void RGTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RGTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RGTextFieldActionPerformed
+
+    private void CityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CityTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CityTextFieldActionPerformed
+
+    private void StateProvinceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StateProvinceTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StateProvinceTextFieldActionPerformed
+
+    private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
+
+        String cpf = CPFTextField.getText();
+        String email = EmailTextField.getText();
+        String phone = PhoneTextField.getText();
+        String rg = RGTextField.getText();
+        String clientName = NameTextField.getText();
+        String cidade = CityTextField.getText();
+        String estado = StateProvinceTextField.getText();
+        String cnh = CNHTextField.getText();
         
-        FormClientList fc = new FormClientList();
-        fc.setVisible(true);
+        if (cpf.isEmpty() ||
+                clientName.isEmpty() ||
+                email.isEmpty() ||
+                phone.isEmpty() ||
+                rg.isEmpty() ||
+                cidade.isEmpty() ||
+                estado.isEmpty() ||
+                cnh.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios!");
+            return;
+        }
+
+        // RegEx for email
+        Matcher m = Pattern.compile("[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}").matcher(email);
+        if (!m.find()) {
+            JOptionPane.showMessageDialog(null, "Email inválido!");
+            return;
+        }
         
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Poo2Homework", "root", "");
+            
+            String query = "insert into Cliente "
+                    + "(nomeCompleto, email, cpf, telefone, rg, cidade, estado, cnh)"
+                    + " values (?,?,?,?,?,?,?,?)";
+            
+            PreparedStatement stmt = con.prepareStatement(query);
+            
+            stmt.setString(1, clientName);
+            stmt.setString(2, email);
+            stmt.setString(3, cpf);
+            stmt.setString(4, phone);
+            stmt.setString(5, rg);
+            stmt.setString(6, cidade);
+            stmt.setString(7, estado);
+            stmt.setString(8, cnh);
+            
+            stmt.executeUpdate();
+            
+            stmt.close();
+            con.close();
+            
+            JOptionPane.showMessageDialog(null, "Cliente \"" + clientName + "\" cadastrado com sucesso!");
+            new FormClientList(this.userName, this.isManager).setVisible(true);
+            dispose();
+            
+        }
+        catch (SQLException | ClassNotFoundException ex) {
+           JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex.getMessage());
+        }
+
+    }//GEN-LAST:event_RegisterButtonActionPerformed
+
+    private void CNHTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNHTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CNHTextFieldActionPerformed
+
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        if (this.from.equals("fromMainView"))
+            new MainView(this.userName, this.isManager).setVisible(true);
+        else if (this.from.equals("fromFormClientList"))
+            new FormClientList(this.userName, this.isManager).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_BackButtonActionPerformed
+
+    private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
+        new FormLogin().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_LogoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -106,32 +408,45 @@ public class FormClientRegister extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormClientRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormClientRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormClientRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormClientRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormClientRegister().setVisible(true);
+                new FormRegister().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JButton BackButton;
+    private javax.swing.JLabel CNHLabel;
+    private javax.swing.JTextField CNHTextField;
+    private javax.swing.JLabel CPFLabel;
+    private javax.swing.JTextField CPFTextField;
+    private javax.swing.JLabel CityLabel;
+    private javax.swing.JTextField CityTextField;
+    private javax.swing.JLabel EmailLabel;
+    private javax.swing.JTextField EmailTextField;
+    private javax.swing.JLabel FullNameLabel;
+    private javax.swing.JButton LogoutButton;
+    private javax.swing.JTextField NameTextField;
+    private javax.swing.JLabel PhoneLabel;
+    private javax.swing.JTextField PhoneTextField;
+    private javax.swing.JLabel RGLabel;
+    private javax.swing.JTextField RGTextField;
+    private javax.swing.JButton RegisterButton;
+    private javax.swing.JLabel StateProvinceLabel;
+    private javax.swing.JTextField StateProvinceTextField;
+    private javax.swing.JLabel TopLabel;
+    private javax.swing.JLabel UserNameLabel;
     // End of variables declaration//GEN-END:variables
 }

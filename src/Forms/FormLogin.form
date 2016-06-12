@@ -74,7 +74,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="USU&#xc1;RIO"/>
+        <Property name="text" type="java.lang.String" value="USU&#xc1;RIO / EMAIL"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="PasswordLabel">

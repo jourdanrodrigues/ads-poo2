@@ -10,22 +10,84 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author FTN - Alunos
+ * @author Jourdan Rodrigues
  */
-public class FormClientList extends javax.swing.JDialog {
+public final class FormClientList extends javax.swing.JDialog {
+    String userName;
+    int isManager;
 
     /**
      * Creates new form FormConsulta
      */
     public FormClientList() {
         initComponents();
+    }
+    
+    public FormClientList(String userName, int isManager){
+        this.userName = userName;
+        this.isManager = isManager;
+        
+        initComponents();
+        
+        getClientList();
+        
+        UserNameLabel.setText(userName + ".");
+        
+        ClientNameField.getDocument().addDocumentListener(new DocumentListener() {
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                getClientList();
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                getClientList();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                getClientList();
+            }
+        });
+    }
+            
+    public void getClientList(){
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Poo2Homework", "root", "");
+
+            String clientName = ClientNameField.getText().toLowerCase();
+            boolean withCode = !clientName.isEmpty();
+
+            String query = "select * from Cliente";
+            query += withCode ? " where lower(nomeCompleto) like ?" : "";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+
+            if (withCode) stmt.setString(1, "%" + clientName + "%");
+
+            ResultSet rs = stmt.executeQuery();
+
+            DefaultTableModel clientslist = (DefaultTableModel) ClientsList.getModel();
+
+            clientslist.setNumRows(0);
+
+            while (rs.next()) {
+                clientslist.addRow(new Object[]{rs.getString("nomeCompleto")});
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+           JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex);
+        }
     }
 
     /**
@@ -37,38 +99,74 @@ public class FormClientList extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        TopLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        ClientsList = new javax.swing.JTable();
+        ClientNameLabel = new javax.swing.JLabel();
+        ClientNameField = new javax.swing.JTextField();
+        RegisterButton = new javax.swing.JButton();
+        BackButton = new javax.swing.JButton();
+        UserNameLabel = new javax.swing.JLabel();
+        LogoutButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Consulta de Cliente");
+        TopLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TopLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TopLabel.setText("Pesquisa de Clientes");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        ClientsList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "CÓDIGO", "NOME", "ENDEREÇO", "TELEFONE"
+                "NOME"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setText("CÓDIGO");
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(ClientsList);
 
-        jButton1.setText("CONSULTAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ClientNameLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        ClientNameLabel.setText("NOME");
+
+        ClientNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ClientNameFieldActionPerformed(evt);
+            }
+        });
+
+        RegisterButton.setText("Cadastrar Cliente");
+        RegisterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegisterButtonActionPerformed(evt);
+            }
+        });
+
+        BackButton.setText("Voltar");
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackButtonActionPerformed(evt);
+            }
+        });
+
+        UserNameLabel.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
+        UserNameLabel.setText("Fulano de tal.");
+
+        LogoutButton.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
+        LogoutButton.setText("Logout");
+        LogoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutButtonActionPerformed(evt);
             }
         });
 
@@ -77,81 +175,65 @@ public class FormClientList extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                .addContainerGap(66, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(TopLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(ClientNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1)
-                        .addContainerGap())
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(111, 111, 111))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap()))))
+                        .addComponent(ClientNameField))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                    .addComponent(RegisterButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(162, 162, 162)
-                .addComponent(jButton1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(BackButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(UserNameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LogoutButton))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BackButton)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(LogoutButton)
+                        .addComponent(UserNameLabel)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TopLabel)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ClientNameLabel)
+                    .addComponent(ClientNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addComponent(RegisterButton)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Classe não encontrada!");
-        }
-        
-        try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/empresa", "root", "");
-            
-            String query = "select * from cliente where codigo = ?";
-            
-            PreparedStatement stmt = con.prepareStatement(query);
-            
-            stmt.setInt(1,Integer.parseInt(jTextField1.getText()));
-            
-            ResultSet rs = stmt.executeQuery();
-            
-            DefaultTableModel t = (DefaultTableModel) jTable1.getModel();
-            
-            t.setNumRows(0);
-            
-            while(rs.next())
-            {
-              t.addRow(new Object[]{rs.getString("codigo"),
-                                    rs.getString("nome"),
-                                    rs.getString("endereco"),
-                                    rs.getString("telefone")});
-            
-            }
-            
-        } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Erro de SQL");
-        }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
+        new FormClientRegister(this.userName, this.isManager, "fromFormClientList").setVisible(true);
+        dispose();
+    }//GEN-LAST:event_RegisterButtonActionPerformed
+
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        new MainView(this.userName, this.isManager).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_BackButtonActionPerformed
+
+    private void ClientNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientNameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ClientNameFieldActionPerformed
+
+    private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
+        new FormLogin().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_LogoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,11 +281,14 @@ public class FormClientList extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton BackButton;
+    private javax.swing.JTextField ClientNameField;
+    private javax.swing.JLabel ClientNameLabel;
+    private javax.swing.JTable ClientsList;
+    private javax.swing.JButton LogoutButton;
+    private javax.swing.JButton RegisterButton;
+    private javax.swing.JLabel TopLabel;
+    private javax.swing.JLabel UserNameLabel;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

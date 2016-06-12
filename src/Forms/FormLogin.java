@@ -10,13 +10,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author FTN - Alunos
+ * @author Jourdan Rodrigues
  */
 public class FormLogin extends javax.swing.JDialog {
 
@@ -50,7 +48,7 @@ public class FormLogin extends javax.swing.JDialog {
         TopLabel.setText("LOGIN");
 
         UserLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        UserLabel.setText("USUÁRIO");
+        UserLabel.setText("USUÁRIO / EMAIL");
 
         PasswordLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         PasswordLabel.setText("SENHA");
@@ -121,29 +119,38 @@ public class FormLogin extends javax.swing.JDialog {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Poo2Homework", "root", "");
             
-            String query = "select count(*) from Usuario where login=? and senha=?";
+            String query = "select nome, gerente from Funcionario where (login=? or email=?) and senha=?";
             
             PreparedStatement stmt = con.prepareStatement(query);
             
-            stmt.setString(1, UserTextField.getText());
-            stmt.setString(2, PasswordField.getText());
+            String user = UserTextField.getText();
+            stmt.setString(1, user);
+            stmt.setString(2, user);
+            stmt.setString(3, new String(PasswordField.getPassword()));
             
             ResultSet rs = stmt.executeQuery();
             
-            int count = 0;
-            while (rs.next()) count = rs.getInt(1);
+            String userName = "";
+            int isManager = 0;
             
-            if (count == 0)
-                JOptionPane.showMessageDialog(null, "Usuário ou senha incorreta!");
-            else
-                new FormClientList().setVisible(true);
+            while (rs.next()){
+                userName = rs.getString("nome");
+                isManager = rs.getInt("gerente");
+            }
             
             stmt.close();
             con.close();
             
+            if (userName.isEmpty())
+                JOptionPane.showMessageDialog(null, "Usuário ou senha incorreta!");
+            else {
+                new MainView(userName, isManager).setVisible(true);
+                dispose();
+            }
+            
         }
         catch (SQLException | ClassNotFoundException ex) {
-           JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex);
+           JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex.getMessage());
         }
         
     }//GEN-LAST:event_LoginButtonActionPerformed
@@ -173,13 +180,10 @@ public class FormLogin extends javax.swing.JDialog {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException |
+                InstantiationException |
+                IllegalAccessException |
+                javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
