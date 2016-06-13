@@ -160,7 +160,7 @@ public final class FormClientList extends javax.swing.JDialog {
         });
 
         UserNameLabel.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
-        UserNameLabel.setText("Fulano de tal.");
+        UserNameLabel.setText("Não conseguimos obter seu nome.");
 
         LogoutButton.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
         LogoutButton.setText("Logout");

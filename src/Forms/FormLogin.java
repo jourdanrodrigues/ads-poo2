@@ -38,14 +38,13 @@ public class FormLogin extends javax.swing.JDialog {
         UserLabel = new javax.swing.JLabel();
         PasswordLabel = new javax.swing.JLabel();
         LoginButton = new javax.swing.JButton();
-        RegisterButton = new javax.swing.JButton();
         UserTextField = new javax.swing.JTextField();
         PasswordField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         TopLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        TopLabel.setText("LOGIN");
+        TopLabel.setText("Login");
 
         UserLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         UserLabel.setText("USUÁRIO / EMAIL");
@@ -57,14 +56,6 @@ public class FormLogin extends javax.swing.JDialog {
         LoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LoginButtonActionPerformed(evt);
-            }
-        });
-
-        RegisterButton.setFont(new java.awt.Font("Ubuntu", 0, 12)); // NOI18N
-        RegisterButton.setText("Cadastrar");
-        RegisterButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegisterButtonActionPerformed(evt);
             }
         });
 
@@ -85,7 +76,6 @@ public class FormLogin extends javax.swing.JDialog {
                     .addComponent(UserLabel)
                     .addComponent(PasswordLabel)
                     .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RegisterButton)
                     .addComponent(UserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(122, Short.MAX_VALUE))
@@ -105,9 +95,7 @@ public class FormLogin extends javax.swing.JDialog {
                 .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(RegisterButton)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         pack();
@@ -159,11 +147,6 @@ public class FormLogin extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_UserTextFieldActionPerformed
 
-    private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
-        new FormRegister().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_RegisterButtonActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -208,7 +191,6 @@ public class FormLogin extends javax.swing.JDialog {
     private javax.swing.JButton LoginButton;
     private javax.swing.JPasswordField PasswordField;
     private javax.swing.JLabel PasswordLabel;
-    private javax.swing.JButton RegisterButton;
     private javax.swing.JLabel TopLabel;
     private javax.swing.JLabel UserLabel;
     private javax.swing.JTextField UserTextField;

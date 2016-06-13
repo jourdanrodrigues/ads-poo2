@@ -5,11 +5,14 @@
  */
 package Forms;
 
+import Classes.Employee;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -19,12 +22,23 @@ import javax.swing.JOptionPane;
  * @author Jourdan Rodrigues
  */
 public class FormRegister extends javax.swing.JFrame {
+    String userName;
+    int isManager;
 
     /**
      * Creates new form FormRegister
      */
     public FormRegister() {
         initComponents();
+    }
+    
+    public FormRegister(String userName, int isManager){
+        this.userName = userName;
+        this.isManager = isManager;
+        
+        initComponents();
+        
+        UserNameLabel.setText(userName + ".");
     }
 
     /**
@@ -56,12 +70,13 @@ public class FormRegister extends javax.swing.JFrame {
         PasswordConfirmationLabel = new javax.swing.JLabel();
         PasswordConfirmationField = new javax.swing.JPasswordField();
         RegisterButton = new javax.swing.JButton();
-        GoToLoginButton = new javax.swing.JButton();
+        UserNameLabel = new javax.swing.JLabel();
+        LogoutButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         TopLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        TopLabel.setText("CADASTRO");
+        TopLabel.setText("Cadastro de Usuário");
 
         NameLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         NameLabel.setText("NOME");
@@ -121,7 +136,7 @@ public class FormRegister extends javax.swing.JFrame {
         });
 
         AccessNameLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        AccessNameLabel.setText("NOME DE ACESSO");
+        AccessNameLabel.setText("NOME DE ACESSO (LOGIN)");
 
         AccessNameTextField.setToolTipText("Seu nome de usuário");
         AccessNameTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -143,11 +158,14 @@ public class FormRegister extends javax.swing.JFrame {
             }
         });
 
-        GoToLoginButton.setFont(new java.awt.Font("Ubuntu", 0, 12)); // NOI18N
-        GoToLoginButton.setText("Login");
-        GoToLoginButton.addActionListener(new java.awt.event.ActionListener() {
+        UserNameLabel.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
+        UserNameLabel.setText("Não conseguimos obter seu nome.");
+
+        LogoutButton.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
+        LogoutButton.setText("Logout");
+        LogoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GoToLoginButtonActionPerformed(evt);
+                LogoutButtonActionPerformed(evt);
             }
         });
 
@@ -155,56 +173,65 @@ public class FormRegister extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(UserNameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LogoutButton))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(GoToLoginButton)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TopLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(39, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(NameLabel)
+                            .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(EmailLabel)
+                            .addComponent(EmailTextField)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(NameLabel)
-                                .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(CPFTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CPFLabel))
                             .addGap(14, 14, 14)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(EmailLabel)
-                                .addComponent(EmailTextField)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CPFTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CPFLabel))
-                                .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(PhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(PhoneLabel)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(RGTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(RGLabel))
-                                .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(AddressLabel)
-                                    .addComponent(AddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(AccessNameTextField)
-                                    .addComponent(AccessNameLabel)
-                                    .addComponent(RegisterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(PasswordLabel)
-                                    .addComponent(PasswordConfirmationLabel)
-                                    .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(PasswordConfirmationField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(TopLabel))
-                .addContainerGap(32, Short.MAX_VALUE))
+                                .addComponent(PhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(PhoneLabel)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(RGTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(RGLabel))
+                            .addGap(14, 14, 14)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(AddressLabel)
+                                .addComponent(AddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(AccessNameTextField)
+                                .addComponent(AccessNameLabel)
+                                .addComponent(RegisterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(14, 14, 14)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(PasswordLabel)
+                                .addComponent(PasswordConfirmationLabel)
+                                .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(PasswordConfirmationField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
-                .addComponent(TopLabel)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LogoutButton)
+                    .addComponent(UserNameLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TopLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NameLabel)
                     .addComponent(EmailLabel))
@@ -243,9 +270,7 @@ public class FormRegister extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(PasswordConfirmationField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(RegisterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(GoToLoginButton)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
@@ -281,80 +306,41 @@ public class FormRegister extends javax.swing.JFrame {
 
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
 
-        String cpf = CPFTextField.getText();
-        char[] password = PasswordField.getPassword();
-        String passwordString = new String(password);
-        String email = EmailTextField.getText();
-        String phone = PhoneTextField.getText();
-        String rg = RGTextField.getText();
-        String userName = NameTextField.getText();
-        String address = AddressTextField.getText();
-        String accessName = AccessNameTextField.getText();
-        
-        if (cpf.isEmpty() ||
-                userName.isEmpty() ||
-                passwordString.isEmpty() ||
-                email.isEmpty() ||
-                phone.isEmpty() ||
-                rg.isEmpty() ||
-                address.isEmpty() ||
-                accessName.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios!");
-            return;
-        }
-        
-        
-        if (!Arrays.equals(password, PasswordConfirmationField.getPassword())) {
-            JOptionPane.showMessageDialog(null, "Senhas não conferem!");
-            return;
-        }
-
-        // RegEx for email
-        Matcher m = Pattern.compile("[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}").matcher(email);
-        if (!m.find()) {
-            JOptionPane.showMessageDialog(null, "Email inválido!");
-            return;
-        }
-        
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Poo2Homework", "root", "");
             
-            String query = "insert into Usuario "
-                    + "(nome, email, cpf, telefone, rg, endereco, login, senha)"
-                    + " values (?,?,?,?,?,?,?,?)";
+            Map<String, String> map = new HashMap<>();
+
+            map.put("cpf", CPFTextField.getText());
+            map.put("password", new String(PasswordField.getPassword()));
+            map.put("passwordConfirmation", new String(PasswordConfirmationField.getPassword()));
+            map.put("email", EmailTextField.getText());
+            map.put("phone", PhoneTextField.getText());
+            map.put("rg", RGTextField.getText());
+            map.put("userName", NameTextField.getText());
+            map.put("address", AddressTextField.getText());
+            map.put("login", AccessNameTextField.getText());
+
+            Employee employee = new Employee(map);
+            String[] operationResponse = employee.registerEmployee();
             
-            PreparedStatement stmt = con.prepareStatement(query);
-            
-            stmt.setString(1, userName);
-            stmt.setString(2, email);
-            stmt.setString(3, cpf);
-            stmt.setString(4, phone);
-            stmt.setString(5, rg);
-            stmt.setString(6, address);
-            stmt.setString(7, accessName);
-            stmt.setString(8, passwordString);
-            
-            stmt.executeUpdate();
-            
-            JOptionPane.showMessageDialog(null, "Usuário \"" + userName + "\" cadastrado com sucesso!");
-            new FormClientList().setVisible(true);
-            
-            stmt.close();
-            con.close();
-            dispose();
-            
+            JOptionPane.showMessageDialog(null, operationResponse[1]);
+
+            if (operationResponse[0].equals("success")) {
+                new MainView(this.userName, this.isManager).setVisible(true);
+                dispose();
+            }
+        
         }
-        catch (SQLException | ClassNotFoundException ex) {
-           JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex);
+        catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }//GEN-LAST:event_RegisterButtonActionPerformed
 
-    private void GoToLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoToLoginButtonActionPerformed
+    private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
         new FormLogin().setVisible(true);
         dispose();
-    }//GEN-LAST:event_GoToLoginButtonActionPerformed
+    }//GEN-LAST:event_LogoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -403,7 +389,7 @@ public class FormRegister extends javax.swing.JFrame {
     private javax.swing.JTextField CPFTextField;
     private javax.swing.JLabel EmailLabel;
     private javax.swing.JTextField EmailTextField;
-    private javax.swing.JButton GoToLoginButton;
+    private javax.swing.JButton LogoutButton;
     private javax.swing.JLabel NameLabel;
     private javax.swing.JTextField NameTextField;
     private javax.swing.JPasswordField PasswordConfirmationField;
@@ -416,5 +402,6 @@ public class FormRegister extends javax.swing.JFrame {
     private javax.swing.JTextField RGTextField;
     private javax.swing.JButton RegisterButton;
     private javax.swing.JLabel TopLabel;
+    private javax.swing.JLabel UserNameLabel;
     // End of variables declaration//GEN-END:variables
 }

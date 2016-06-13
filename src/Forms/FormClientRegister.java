@@ -5,12 +5,9 @@
  */
 package Forms;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import Classes.Client;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 
 /**
@@ -73,7 +70,7 @@ public class FormClientRegister extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         TopLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        TopLabel.setText("CADASTRO DE CLIENTE");
+        TopLabel.setText("Cadastro de Cliente");
 
         FullNameLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         FullNameLabel.setText("NOME COMPLETO");
@@ -167,7 +164,7 @@ public class FormClientRegister extends javax.swing.JFrame {
         });
 
         UserNameLabel.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
-        UserNameLabel.setText("Fulano de tal.");
+        UserNameLabel.setText("Não conseguimos obter seu nome.");
 
         LogoutButton.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
         LogoutButton.setText("Logout");
@@ -310,66 +307,31 @@ public class FormClientRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_StateProvinceTextFieldActionPerformed
 
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
-
-        String cpf = CPFTextField.getText();
-        String email = EmailTextField.getText();
-        String phone = PhoneTextField.getText();
-        String rg = RGTextField.getText();
-        String clientName = NameTextField.getText();
-        String cidade = CityTextField.getText();
-        String estado = StateProvinceTextField.getText();
-        String cnh = CNHTextField.getText();
-        
-        if (cpf.isEmpty() ||
-                clientName.isEmpty() ||
-                email.isEmpty() ||
-                phone.isEmpty() ||
-                rg.isEmpty() ||
-                cidade.isEmpty() ||
-                estado.isEmpty() ||
-                cnh.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios!");
-            return;
-        }
-
-        // RegEx for email
-        Matcher m = Pattern.compile("[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}").matcher(email);
-        if (!m.find()) {
-            JOptionPane.showMessageDialog(null, "Email inválido!");
-            return;
-        }
         
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Poo2Homework", "root", "");
+            Map<String, String> map = new HashMap<>();
             
-            String query = "insert into Cliente "
-                    + "(nomeCompleto, email, cpf, telefone, rg, cidade, estado, cnh)"
-                    + " values (?,?,?,?,?,?,?,?)";
+            map.put("cpf", CPFTextField.getText());
+            map.put("email", EmailTextField.getText());
+            map.put("phone", PhoneTextField.getText());
+            map.put("rg", RGTextField.getText());
+            map.put("fullName", NameTextField.getText());
+            map.put("city", CityTextField.getText());
+            map.put("state", StateProvinceTextField.getText());
+            map.put("cnh", CNHTextField.getText());
             
-            PreparedStatement stmt = con.prepareStatement(query);
+            Client client = new Client(map);
+            String [] operationResponse = client.registerClient();
             
-            stmt.setString(1, clientName);
-            stmt.setString(2, email);
-            stmt.setString(3, cpf);
-            stmt.setString(4, phone);
-            stmt.setString(5, rg);
-            stmt.setString(6, cidade);
-            stmt.setString(7, estado);
-            stmt.setString(8, cnh);
+            JOptionPane.showMessageDialog(null, operationResponse[1]);
             
-            stmt.executeUpdate();
-            
-            stmt.close();
-            con.close();
-            
-            JOptionPane.showMessageDialog(null, "Cliente \"" + clientName + "\" cadastrado com sucesso!");
-            new FormClientList(this.userName, this.isManager).setVisible(true);
-            dispose();
-            
+            if (operationResponse[0].equals("success")){
+                new FormClientList(this.userName, this.isManager).setVisible(true);
+                dispose();
+            }
         }
-        catch (SQLException | ClassNotFoundException ex) {
-           JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex.getMessage());
+        catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }//GEN-LAST:event_RegisterButtonActionPerformed
@@ -407,15 +369,14 @@ public class FormClientRegister extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException |
+                InstantiationException |
+                IllegalAccessException |
+                javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FormRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
