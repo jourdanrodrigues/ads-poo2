@@ -218,7 +218,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_LogoutButtonActionPerformed
 
     private void RegisterEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterEmployeeButtonActionPerformed
-        new FormRegister(this.userName, this.isManager).setVisible(true);
+        new FormEmployeeRegister(this.userName, this.isManager).setVisible(true);
     }//GEN-LAST:event_RegisterEmployeeButtonActionPerformed
 
     /**

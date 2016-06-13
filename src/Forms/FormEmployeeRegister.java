@@ -21,18 +21,18 @@ import javax.swing.JOptionPane;
  *
  * @author Jourdan Rodrigues
  */
-public class FormRegister extends javax.swing.JFrame {
+public class FormEmployeeRegister extends javax.swing.JFrame {
     String userName;
     int isManager;
 
     /**
      * Creates new form FormRegister
      */
-    public FormRegister() {
+    public FormEmployeeRegister() {
         initComponents();
     }
     
-    public FormRegister(String userName, int isManager){
+    public FormEmployeeRegister(String userName, int isManager){
         this.userName = userName;
         this.isManager = isManager;
         
@@ -359,14 +359,18 @@ public class FormRegister extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormEmployeeRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormEmployeeRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormEmployeeRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormEmployeeRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -375,7 +379,7 @@ public class FormRegister extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormRegister().setVisible(true);
+                new FormEmployeeRegister().setVisible(true);
             }
         });
     }
