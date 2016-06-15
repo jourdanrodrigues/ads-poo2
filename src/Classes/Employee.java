@@ -8,8 +8,8 @@ package Classes;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -64,7 +64,7 @@ public class Employee {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Poo2Homework", "root", "");
             
             String query = "insert into Funcionario "
-                    + "(nome, email, cpf, telefone, rg, endereco, login, senha, gerente)"
+                    + "(nome, email, cpf, telefone, rg, endereco, login, senha, gerente, numeroPis)"
                     + " values (?,?,?,?,?,?,?,?,?,?)";
             
             PreparedStatement stmt = con.prepareStatement(query);
@@ -78,6 +78,7 @@ public class Employee {
             stmt.setString(7, login);
             stmt.setString(8, password);
             stmt.setInt(9, isManager);
+            stmt.setString(10, pisNumber);
             
             stmt.executeUpdate();
             
@@ -90,9 +91,32 @@ public class Employee {
         }
         catch (SQLException | ClassNotFoundException ex) {
             data[0] = "error";
-            data[1] = "Ocorreu o seguinte erro:\n" + ex;
+            data[1] = "Ocorreu o seguinte erro:\n" + ex.getMessage();
         }
         
         return data;
+    }
+    
+    public static ResultSet getEmployeeList(String employeeName) throws SQLException{
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Poo2Homework", "root", "");
+
+            employeeName = employeeName.toLowerCase();
+            boolean withCode = !employeeName.isEmpty();
+
+            String query = "select * from Funcionario";
+            query += withCode ? " where lower(nome) like ?" : "";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+
+            if (withCode) stmt.setString(1, "%" + employeeName + "%");
+
+            return stmt.executeQuery();
+
+        } catch (SQLException | ClassNotFoundException ex) {
+           throw new SQLException(ex.getMessage());
+        }
     }
 }

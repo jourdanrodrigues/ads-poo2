@@ -8,11 +8,13 @@ package Classes;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -87,5 +89,28 @@ public class Client {
            return data;
         }
         
+    }
+            
+    public static ResultSet getClientList(String clientName) throws SQLException{
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Poo2Homework", "root", "");
+
+            clientName = clientName.toLowerCase();
+            boolean withCode = !clientName.isEmpty();
+
+            String query = "select * from Cliente";
+            query += withCode ? " where lower(nomeCompleto) like ?" : "";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+
+            if (withCode) stmt.setString(1, "%" + clientName + "%");
+
+            return stmt.executeQuery();
+
+        } catch (SQLException | ClassNotFoundException ex) {
+           throw new SQLException(ex.getMessage());
+        }
     }
 }

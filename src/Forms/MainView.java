@@ -85,6 +85,11 @@ public class MainView extends javax.swing.JFrame {
         });
 
         SearchEmployeesButton.setText("Pesquisar");
+        SearchEmployeesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchEmployeesButtonActionPerformed(evt);
+            }
+        });
 
         SearchPromotionButton.setText("Pesquisar");
 
@@ -129,6 +134,11 @@ public class MainView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(UserNameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LogoutButton))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,11 +161,6 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(RegisterPromotionButton))
                 .addContainerGap(22, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(UserNameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LogoutButton))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(TopLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -166,9 +171,9 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LogoutButton)
                     .addComponent(UserNameLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TopLabel)
-                .addGap(18, 18, 18)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SearchClientsButton)
                     .addComponent(RegisterClientButton)
@@ -218,8 +223,14 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_LogoutButtonActionPerformed
 
     private void RegisterEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterEmployeeButtonActionPerformed
-        new FormEmployeeRegister(this.userName, this.isManager).setVisible(true);
+        new FormEmployeeRegister(this.userName, this.isManager, "fromMainView").setVisible(true);
+        dispose();
     }//GEN-LAST:event_RegisterEmployeeButtonActionPerformed
+
+    private void SearchEmployeesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchEmployeesButtonActionPerformed
+        new FormEmployeeList(this.userName, this.isManager).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_SearchEmployeesButtonActionPerformed
 
     /**
      * @param args the command line arguments
