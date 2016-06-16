@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
  * @author jourdanrodrigues
  */
 public class EmployeeUpdate extends javax.swing.JFrame {
-    String userName, employeeId;
-    int isManager;
+    String userName, selectedEmployeeId;
+    int isManager, employeeId;
 
     /**
      * Creates new form EmployeeUpdate
@@ -28,17 +28,18 @@ public class EmployeeUpdate extends javax.swing.JFrame {
         initComponents();
     }
     
-    public EmployeeUpdate(String userName, int isManager, String employeeId) {
+    public EmployeeUpdate(String userName, int isManager, int employeeId, String selectedEmployeeId) {
         try {
             this.userName = userName;
             this.isManager = isManager;
             this.employeeId = employeeId;
+            this.selectedEmployeeId = selectedEmployeeId;
 
             initComponents();
         
             UserNameLabel.setText(userName + ".");
             
-            Map<String, String> map = Employee.getEmployee(employeeId);
+            Map<String, String> map = Employee.getEmployee(selectedEmployeeId);
         
             CPFTextField.setText(map.get("cpf"));
             EmailTextField.setText(map.get("email"));
@@ -52,7 +53,7 @@ public class EmployeeUpdate extends javax.swing.JFrame {
         }
         catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex.getMessage());
-            new ClientList(userName, isManager).setVisible(true);
+            new ClientList(userName, isManager, employeeId).setVisible(true);
             dispose();
         }
     }
@@ -320,7 +321,7 @@ public class EmployeeUpdate extends javax.swing.JFrame {
             map.put("address", AddressTextField.getText());
             map.put("pisNumber", PisNumberTextField.getText());
             map.put("login", AccessNameTextField.getText());
-            map.put("id", this.employeeId);
+            map.put("id", this.selectedEmployeeId);
             map.put("isManager", IsManagerCheckBox.isSelected() ? "1" : "0");
 
             Employee employee = new Employee(map);
@@ -329,7 +330,7 @@ public class EmployeeUpdate extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, operationResponse[1]);
 
             if (operationResponse[0].equals("success")){
-                new EmployeeList(this.userName, this.isManager).setVisible(true);
+                new EmployeeList(this.userName, this.isManager, this.employeeId).setVisible(true);
                 dispose();
             }
         }
@@ -344,7 +345,7 @@ public class EmployeeUpdate extends javax.swing.JFrame {
     }//GEN-LAST:event_LogoutButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        new EmployeeList(this.userName, this.isManager).setVisible(true);
+        new EmployeeList(this.userName, this.isManager, this.employeeId).setVisible(true);
         dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
 

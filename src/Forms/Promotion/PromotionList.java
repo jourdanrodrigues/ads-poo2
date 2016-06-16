@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public final class PromotionList extends javax.swing.JFrame {
     String userName;
-    int isManager;
+    int isManager, employeeId;
 
     /**
      * Creates new form PromotionList
@@ -27,9 +27,10 @@ public final class PromotionList extends javax.swing.JFrame {
         initComponents();
     }
     
-    public PromotionList(String userName, int isManager){
+    public PromotionList(String userName, int isManager, int employeeId){
         this.userName = userName;
         this.isManager = isManager;
+        this.employeeId = employeeId;
         
         initComponents();
         
@@ -168,12 +169,12 @@ public final class PromotionList extends javax.swing.JFrame {
     }//GEN-LAST:event_LogoutButtonActionPerformed
 
     private void PromotionRegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PromotionRegisterButtonActionPerformed
-        new PromotionRegister(this.userName, this.isManager, "fromPromotionList").setVisible(true);
+        new PromotionRegister(this.userName, this.isManager, this.employeeId, "fromPromotionList").setVisible(true);
         dispose();
     }//GEN-LAST:event_PromotionRegisterButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        new MainView(this.userName, this.isManager).setVisible(true);
+        new MainView(this.userName, this.isManager, this.employeeId).setVisible(true);
         dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
 

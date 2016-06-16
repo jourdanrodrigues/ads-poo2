@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class EmployeeRegister extends javax.swing.JFrame {
     String userName, from;
-    int isManager;
+    int isManager, employeeId;
 
     /**
      * Creates new form FormRegister
@@ -27,10 +27,11 @@ public class EmployeeRegister extends javax.swing.JFrame {
         initComponents();
     }
     
-    public EmployeeRegister(String userName, int isManager, String from){
+    public EmployeeRegister(String userName, int isManager, int employeeId, String from){
         this.userName = userName;
         this.isManager = isManager;
         this.from = from;
+        this.employeeId = employeeId;
         
         initComponents();
         
@@ -361,7 +362,7 @@ public class EmployeeRegister extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, operationResponse[1]);
 
             if (operationResponse[0].equals("success")) {
-                new EmployeeList(this.userName, this.isManager).setVisible(true);
+                new EmployeeList(this.userName, this.isManager, this.employeeId).setVisible(true);
                 dispose();
             }
         
@@ -379,9 +380,9 @@ public class EmployeeRegister extends javax.swing.JFrame {
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         if (this.from.equals("fromMainView"))
-            new MainView(this.userName, this.isManager).setVisible(true);
+            new MainView(this.userName, this.isManager, this.employeeId).setVisible(true);
         else if (this.from.equals("fromFormEmployeeList"))
-            new EmployeeList(this.userName, this.isManager).setVisible(true);
+            new EmployeeList(this.userName, this.isManager, this.employeeId).setVisible(true);
         dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
 

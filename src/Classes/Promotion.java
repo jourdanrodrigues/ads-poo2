@@ -5,15 +5,13 @@
  */
 package Classes;
 
+import static Classes.Utils.checkDate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,11 +30,7 @@ public class Promotion {
                 map.get("endDate").isEmpty())
             throw new IllegalArgumentException("Todos os campos são obrigatórios!");
         
-        String pattern = "([0-9]{2})/([0-9]{2})/([0-9]{4})";
-        // RegEx for email
-        Matcher m = Pattern.compile(pattern).matcher(map.get("endDate"));
-        if (!m.find())
-            throw new IllegalArgumentException("Data inválida!");
+        Matcher m = checkDate(map.get("endDate"));
         
         map.put("endDate", m.group(3) + "-" + m.group(2) + "-" + m.group(1));
         
@@ -89,9 +83,9 @@ public class Promotion {
             Connection con = DBConnection.getConnection();
 
             String query = "select * from Promocao where data_limite >= CURDATE()";
-
+            
             PreparedStatement stmt = con.prepareStatement(query);
-
+            
             ResultSet rs = stmt.executeQuery();
             
             table.setNumRows(0);

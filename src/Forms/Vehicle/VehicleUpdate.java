@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class VehicleUpdate extends javax.swing.JFrame {
     String userName, vehicleId;
-    int isManager;
+    int isManager, employeeId;
 
     /**
      * Creates new form VehicleUpdate
@@ -27,11 +27,12 @@ public class VehicleUpdate extends javax.swing.JFrame {
         initComponents();
     }
     
-    public VehicleUpdate(String userName, int isManager, String vehicleId) {
+    public VehicleUpdate(String userName, int isManager, int employeeId, String vehicleId) {
         try {
             this.userName = userName;
             this.isManager = isManager;
             this.vehicleId = vehicleId;
+            this.employeeId = employeeId;
 
             initComponents();
         
@@ -48,7 +49,7 @@ public class VehicleUpdate extends javax.swing.JFrame {
         }
         catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex.getMessage());
-            new VehicleList(userName, isManager).setVisible(true);
+            new VehicleList(userName, isManager, employeeId).setVisible(true);
             dispose();
         }
     }
@@ -263,7 +264,7 @@ public class VehicleUpdate extends javax.swing.JFrame {
     }//GEN-LAST:event_ManufacturerTextFieldActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        new VehicleList(this.userName, this.isManager).setVisible(true);
+        new VehicleList(this.userName, this.isManager, this.employeeId).setVisible(true);
         dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
 
@@ -307,7 +308,7 @@ public class VehicleUpdate extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, operationResponse[1]);
 
             if (operationResponse[0].equals("success")){
-                new VehicleList(this.userName, this.isManager).setVisible(true);
+                new VehicleList(this.userName, this.isManager, this.employeeId).setVisible(true);
                 dispose();
             }
         }

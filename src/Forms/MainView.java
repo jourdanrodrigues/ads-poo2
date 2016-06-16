@@ -13,14 +13,15 @@ import Forms.Employee.EmployeeRegister;
 import Forms.Employee.EmployeeList;
 import Forms.Client.ClientRegister;
 import Forms.Client.ClientList;
+import Forms.Sale.CloseSale;
 
 /**
  *
  * @author jourdanrodrigues
  */
-public class MainView extends javax.swing.JFrame {
+public final class MainView extends javax.swing.JFrame {
     String userName;
-    int isManager;
+    int isManager, employeeId;
 
     /**
      * Creates new form FormPrincipal
@@ -29,9 +30,10 @@ public class MainView extends javax.swing.JFrame {
         initComponents();
     }
     
-    public MainView(String userName, int isManager) {
+    public MainView(String userName, int isManager, int employeeId) {
         this.userName = userName;
         this.isManager = isManager;
+        this.employeeId = employeeId;
         
         initComponents();
         
@@ -45,7 +47,6 @@ public class MainView extends javax.swing.JFrame {
             RegisterVehicleButton.setVisible(false);
         }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,6 +71,7 @@ public class MainView extends javax.swing.JFrame {
         TopLabel = new javax.swing.JLabel();
         UserNameLabel = new javax.swing.JLabel();
         LogoutButton = new javax.swing.JButton();
+        CloseSaleButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -151,6 +153,13 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
+        CloseSaleButton.setText("Fechar Venda");
+        CloseSaleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CloseSaleButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,30 +170,42 @@ public class MainView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LogoutButton))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(ClientLabel)
-                                    .addComponent(EmployeeLabel)
                                     .addComponent(PromotionLabel))
-                                .addGap(38, 38, 38)
+                                .addGap(47, 47, 47)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(SearchClientsButton)
-                                    .addComponent(SearchPromotionButton)
-                                    .addComponent(SearchEmployeesButton)
-                                    .addComponent(SearchVehiclesButton)))
-                            .addComponent(VehicleLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RegisterClientButton)
-                            .addComponent(RegisterEmployeeButton)
-                            .addComponent(RegisterPromotionButton)
-                            .addComponent(RegisterVehicleButton)))
-                    .addComponent(TopLabel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(SearchPromotionButton))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(RegisterClientButton)
+                                    .addComponent(RegisterPromotionButton)))
+                            .addComponent(TopLabel))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(CloseSaleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(EmployeeLabel)
+                                        .addGap(38, 38, 38)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(SearchEmployeesButton)
+                                            .addComponent(SearchVehiclesButton)))
+                                    .addComponent(VehicleLabel))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(RegisterEmployeeButton)
+                                    .addComponent(RegisterVehicleButton))))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,6 +226,8 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(RegisterPromotionButton)
                     .addComponent(PromotionLabel))
                 .addGap(18, 18, 18)
+                .addComponent(CloseSaleButton)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SearchVehiclesButton)
                     .addComponent(RegisterVehicleButton)
@@ -214,29 +237,29 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(SearchEmployeesButton)
                     .addComponent(RegisterEmployeeButton)
                     .addComponent(EmployeeLabel))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void SearchClientsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchClientsButtonActionPerformed
-        new ClientList(this.userName, this.isManager).setVisible(true);
+        new ClientList(this.userName, this.isManager, this.employeeId).setVisible(true);
         dispose();
     }//GEN-LAST:event_SearchClientsButtonActionPerformed
 
     private void RegisterVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterVehicleButtonActionPerformed
-        new VehicleRegister(this.userName, this.isManager, "fromMainView").setVisible(true);
+        new VehicleRegister(this.userName, this.isManager, this.employeeId, "fromMainView").setVisible(true);
         dispose();
     }//GEN-LAST:event_RegisterVehicleButtonActionPerformed
 
     private void SearchVehiclesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchVehiclesButtonActionPerformed
-        new VehicleList(this.userName, this.isManager).setVisible(true);
+        new VehicleList(this.userName, this.isManager, this.employeeId).setVisible(true);
         dispose();
     }//GEN-LAST:event_SearchVehiclesButtonActionPerformed
 
     private void RegisterClientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterClientButtonActionPerformed
-        new ClientRegister(this.userName, this.isManager, "fromMainView").setVisible(true);
+        new ClientRegister(this.userName, this.isManager, this.employeeId, "fromMainView").setVisible(true);
         dispose();
     }//GEN-LAST:event_RegisterClientButtonActionPerformed
 
@@ -246,24 +269,29 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_LogoutButtonActionPerformed
 
     private void RegisterEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterEmployeeButtonActionPerformed
-        new EmployeeRegister(this.userName, this.isManager, "fromMainView").setVisible(true);
+        new EmployeeRegister(this.userName, this.isManager, this.employeeId, "fromMainView").setVisible(true);
         dispose();
     }//GEN-LAST:event_RegisterEmployeeButtonActionPerformed
 
     private void SearchEmployeesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchEmployeesButtonActionPerformed
-        new EmployeeList(this.userName, this.isManager).setVisible(true);
+        new EmployeeList(this.userName, this.isManager, this.employeeId).setVisible(true);
         dispose();
     }//GEN-LAST:event_SearchEmployeesButtonActionPerformed
 
     private void SearchPromotionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchPromotionButtonActionPerformed
-        new PromotionList(this.userName, this.isManager).setVisible(true);
+        new PromotionList(this.userName, this.isManager, this.employeeId).setVisible(true);
         dispose();
     }//GEN-LAST:event_SearchPromotionButtonActionPerformed
 
     private void RegisterPromotionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterPromotionButtonActionPerformed
-        new PromotionRegister(this.userName, this.isManager, "fromMainView").setVisible(true);
+        new PromotionRegister(this.userName, this.isManager, this.employeeId, "fromMainView").setVisible(true);
         dispose();
     }//GEN-LAST:event_RegisterPromotionButtonActionPerformed
+
+    private void CloseSaleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseSaleButtonActionPerformed
+        new CloseSale(this.userName, this.isManager, this.employeeId).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_CloseSaleButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,6 +337,7 @@ public class MainView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ClientLabel;
+    private javax.swing.JButton CloseSaleButton;
     private javax.swing.JLabel EmployeeLabel;
     private javax.swing.JButton LogoutButton;
     private javax.swing.JLabel PromotionLabel;

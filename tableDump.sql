@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 16-Jun-2016 às 23:08
+-- Generation Time: 17-Jun-2016 às 01:25
 -- Versão do servidor: 10.1.13-MariaDB
 -- PHP Version: 5.6.21
 
@@ -118,7 +118,25 @@ CREATE TABLE `Veiculo` (
 --
 
 INSERT INTO `Veiculo` (`id`, `modelo`, `fabricante`, `cor`, `chassi`, `ano`, `preco`) VALUES
-(1, 'tal', 'volkswagen', 'Azul Claro', '12345678912345678', 2014, 124.1);
+(1, 'Gol', 'volkswagen', 'Azul Claro', '12345678912345678', 2014, 12400.1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `Venda`
+--
+
+CREATE TABLE `Venda` (
+  `id` int(11) NOT NULL,
+  `veiculo_id` int(11) NOT NULL,
+  `funcionario_id` int(11) NOT NULL,
+  `promocao_id` int(11) DEFAULT NULL,
+  `cliente_id` int(11) NOT NULL,
+  `data` date NOT NULL,
+  `forma_pagamento` varchar(20) NOT NULL,
+  `servicos_adicionais` varchar(140) NOT NULL,
+  `valor` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -154,6 +172,12 @@ ALTER TABLE `Veiculo`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `Venda`
+--
+ALTER TABLE `Venda`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -177,6 +201,11 @@ ALTER TABLE `Promocao`
 --
 ALTER TABLE `Veiculo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `Venda`
+--
+ALTER TABLE `Venda`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

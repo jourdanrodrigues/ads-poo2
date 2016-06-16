@@ -31,64 +31,62 @@
               <Component id="LogoutButton" min="-2" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <EmptySpace pref="14" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="NameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="NameTextField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="EmailLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="EmailTextField" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="2" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="CPFTextField" alignment="0" min="-2" pref="248" max="-2" attributes="0"/>
-                          <Component id="CPFLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="PhoneTextField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
-                          <Component id="PhoneLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="2" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="RGTextField" alignment="0" min="-2" pref="248" max="-2" attributes="0"/>
-                          <Component id="RGLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="AddressLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="AddressTextField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="UpdateButton" min="-2" pref="248" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="IsManagerCheckBox" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="AccessNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="AccessNameTextField" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="PisNumberLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="PisNumberTextField" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-              </Group>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="TopLabel" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="NameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="NameTextField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="EmailLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="EmailTextField" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="2" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="CPFTextField" alignment="0" min="-2" pref="248" max="-2" attributes="0"/>
+                              <Component id="CPFLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="PhoneTextField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
+                              <Component id="PhoneLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="2" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="RGTextField" alignment="0" min="-2" pref="248" max="-2" attributes="0"/>
+                              <Component id="RGLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="AddressLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="AddressTextField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="UpdateButton" min="-2" pref="248" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="IsManagerCheckBox" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="AccessNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="AccessNameTextField" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="PisNumberLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="PisNumberTextField" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Component id="TopLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>

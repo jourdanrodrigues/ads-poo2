@@ -107,7 +107,7 @@ public class Login extends javax.swing.JDialog {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Poo2Homework", "root", "");
             
-            String query = "select nome, gerente from Funcionario where (login=? or email=?) and senha=?";
+            String query = "select id, nome, gerente from Funcionario where (login=? or email=?) and senha=?";
             
             PreparedStatement stmt = con.prepareStatement(query);
             
@@ -119,9 +119,10 @@ public class Login extends javax.swing.JDialog {
             ResultSet rs = stmt.executeQuery();
             
             String userName = "";
-            int isManager = 0;
+            int isManager = 0, employeeId = isManager;
             
             while (rs.next()){
+                employeeId = rs.getInt("id");
                 userName = rs.getString("nome");
                 isManager = rs.getInt("gerente");
             }
@@ -132,7 +133,7 @@ public class Login extends javax.swing.JDialog {
             if (userName.isEmpty())
                 JOptionPane.showMessageDialog(null, "Usuário ou senha incorreta!");
             else {
-                new MainView(userName, isManager).setVisible(true);
+                new MainView(userName, isManager, employeeId).setVisible(true);
                 dispose();
             }
             

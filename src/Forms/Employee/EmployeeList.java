@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public final class EmployeeList extends javax.swing.JFrame {
     String userName;
-    int isManager;
+    int isManager, employeeId;
 
     /**
      * Creates new form FormEmployeeList
@@ -29,9 +29,10 @@ public final class EmployeeList extends javax.swing.JFrame {
         initComponents();
     }
     
-    public EmployeeList(String userName, int isManager) {
+    public EmployeeList(String userName, int isManager, int employeeId) {
         this.userName = userName;
         this.isManager = isManager;
+        this.employeeId = employeeId;
         
         initComponents();
         
@@ -216,7 +217,7 @@ public final class EmployeeList extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void EmployeeRegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeRegisterButtonActionPerformed
-        new EmployeeRegister(this.userName, this.isManager, "fromFormEmployeeList").setVisible(true);
+        new EmployeeRegister(this.userName, this.isManager, this.employeeId, "fromFormEmployeeList").setVisible(true);
         dispose();
     }//GEN-LAST:event_EmployeeRegisterButtonActionPerformed
 
@@ -230,13 +231,13 @@ public final class EmployeeList extends javax.swing.JFrame {
     }//GEN-LAST:event_EmployeeNameFieldActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        new MainView(this.userName, this.isManager).setVisible(true);
+        new MainView(this.userName, this.isManager, this.employeeId).setVisible(true);
         dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void EmployeeUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeUpdateButtonActionPerformed
-        String employeeId = (String) EmployeesList.getModel().getValueAt(EmployeesList.getSelectedRow(), 0);
-        new EmployeeUpdate(this.userName, this.isManager, employeeId).setVisible(true);
+        String selectedEmployeeId = (String) EmployeesList.getModel().getValueAt(EmployeesList.getSelectedRow(), 0);
+        new EmployeeUpdate(this.userName, this.isManager, this.employeeId, selectedEmployeeId).setVisible(true);
         dispose();
     }//GEN-LAST:event_EmployeeUpdateButtonActionPerformed
 

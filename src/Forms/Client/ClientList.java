@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public final class ClientList extends javax.swing.JDialog {
     String userName;
-    int isManager;
+    int isManager, employeeId;
 
     /**
      * Creates new form FormConsulta
@@ -29,9 +29,10 @@ public final class ClientList extends javax.swing.JDialog {
         initComponents();
     }
     
-    public ClientList(String userName, int isManager){
+    public ClientList(String userName, int isManager, int employeeId){
         this.userName = userName;
         this.isManager = isManager;
+        this.employeeId = employeeId;
         
         initComponents();
         
@@ -216,12 +217,12 @@ public final class ClientList extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
-        new ClientRegister(this.userName, this.isManager, "fromFormClientList").setVisible(true);
+        new ClientRegister(this.userName, this.isManager, this.employeeId, "fromFormClientList").setVisible(true);
         dispose();
     }//GEN-LAST:event_RegisterButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        new MainView(this.userName, this.isManager).setVisible(true);
+        new MainView(this.userName, this.isManager, this.employeeId).setVisible(true);
         dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
 
@@ -236,7 +237,7 @@ public final class ClientList extends javax.swing.JDialog {
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
         String clientId = (String) ClientsList.getModel().getValueAt(ClientsList.getSelectedRow(), 0);
-        new ClientUpdate(this.userName, this.isManager, clientId).setVisible(true);
+        new ClientUpdate(this.userName, this.isManager, this.employeeId, clientId).setVisible(true);
         dispose();
     }//GEN-LAST:event_UpdateButtonActionPerformed
 

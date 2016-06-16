@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class ClientUpdate extends javax.swing.JFrame {
     String userName, clientId;
-    int isManager;
+    int isManager, employeeId;
 
     /**
      * Creates new form ClientUpdate
@@ -27,11 +27,12 @@ public class ClientUpdate extends javax.swing.JFrame {
         initComponents();
     }
     
-    public ClientUpdate(String userName, int isManager, String clientId) {
+    public ClientUpdate(String userName, int isManager, int employeeId, String clientId) {
         try {
             this.userName = userName;
             this.isManager = isManager;
             this.clientId = clientId;
+            this.employeeId = employeeId;
 
             initComponents();
         
@@ -50,7 +51,7 @@ public class ClientUpdate extends javax.swing.JFrame {
         }
         catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex.getMessage());
-            new ClientList(userName, isManager).setVisible(true);
+            new ClientList(userName, isManager, this.employeeId).setVisible(true);
             dispose();
         }
     }
@@ -318,7 +319,7 @@ public class ClientUpdate extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, operationResponse[1]);
 
             if (operationResponse[0].equals("success")){
-                new ClientList(this.userName, this.isManager).setVisible(true);
+                new ClientList(this.userName, this.isManager, this.employeeId).setVisible(true);
                 dispose();
             }
         }
@@ -336,7 +337,7 @@ public class ClientUpdate extends javax.swing.JFrame {
     }//GEN-LAST:event_CNHTextFieldActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        new ClientList(this.userName, this.isManager).setVisible(true);
+        new ClientList(this.userName, this.isManager, this.employeeId).setVisible(true);
         dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
 

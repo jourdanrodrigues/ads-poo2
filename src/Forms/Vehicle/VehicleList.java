@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public final class VehicleList extends javax.swing.JFrame {
     String userName;
-    int isManager;
+    int isManager, employeeId;
 
     /**
      * Creates new form VehicleList
@@ -29,9 +29,10 @@ public final class VehicleList extends javax.swing.JFrame {
         initComponents();
     }
     
-    public VehicleList(String userName, int isManager){
+    public VehicleList(String userName, int isManager, int employeeId){
         this.userName = userName;
         this.isManager = isManager;
+        this.employeeId = employeeId;
         
         initComponents();
         
@@ -222,7 +223,7 @@ public final class VehicleList extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        new MainView(this.userName, this.isManager).setVisible(true);
+        new MainView(this.userName, this.isManager, this.employeeId).setVisible(true);
         dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
 
@@ -236,13 +237,13 @@ public final class VehicleList extends javax.swing.JFrame {
     }//GEN-LAST:event_ModelChassiFieldActionPerformed
 
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
-        new VehicleRegister(this.userName, this.isManager, "fromVehicleList").setVisible(true);
+        new VehicleRegister(this.userName, this.isManager, this.employeeId, "fromVehicleList").setVisible(true);
         dispose();
     }//GEN-LAST:event_RegisterButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
         String vehicleId = (String) VehiclesList.getModel().getValueAt(VehiclesList.getSelectedRow(), 0);
-        new VehicleUpdate(this.userName, this.isManager, vehicleId).setVisible(true);
+        new VehicleUpdate(this.userName, this.isManager, this.employeeId, vehicleId).setVisible(true);
         dispose();
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
