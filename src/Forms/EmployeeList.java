@@ -6,7 +6,6 @@
 package Forms;
 
 import Classes.Employee;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;

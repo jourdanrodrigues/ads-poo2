@@ -43,6 +43,31 @@ public class Vehicle {
             this.vehicleId = Integer.parseInt(map.get("id"));
     }
     
+    public static String getVehicleIdentification(int vehicleId) throws SQLException {
+        
+        try {
+            Connection con = DBConnection.getConnection();
+
+            String query = "select modelo, ano, cor from Veiculo where id = ?";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+
+            stmt.setInt(1, vehicleId);
+
+            ResultSet rs = stmt.executeQuery();
+            
+            String vehicleIdentification = "";
+
+            while (rs.next())
+                vehicleIdentification = rs.getString("modelo") + " " + rs.getString("ano") + " " + rs.getString("cor");
+            
+            return vehicleIdentification;
+
+        } catch (SQLException | ClassNotFoundException ex) {
+           throw new SQLException(ex.getMessage());
+        }
+    }
+    
     public String[] registerVehicle(){
         
         String[] data = new String[2];

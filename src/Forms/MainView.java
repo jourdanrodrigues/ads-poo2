@@ -94,6 +94,11 @@ public class MainView extends javax.swing.JFrame {
         });
 
         SearchPromotionButton.setText("Pesquisar");
+        SearchPromotionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchPromotionButtonActionPerformed(evt);
+            }
+        });
 
         RegisterClientButton.setText("Cadastrar");
         RegisterClientButton.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +122,11 @@ public class MainView extends javax.swing.JFrame {
         });
 
         RegisterPromotionButton.setText("Cadastrar");
+        RegisterPromotionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegisterPromotionButtonActionPerformed(evt);
+            }
+        });
 
         TopLabel.setFont(new java.awt.Font("Ubuntu", 3, 24)); // NOI18N
         TopLabel.setText("SysLoCar");
@@ -146,26 +156,25 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ClientLabel)
-                            .addComponent(EmployeeLabel)
-                            .addComponent(PromotionLabel))
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(SearchClientsButton)
-                            .addComponent(SearchPromotionButton)
-                            .addComponent(SearchEmployeesButton)
-                            .addComponent(SearchVehiclesButton)))
-                    .addComponent(VehicleLabel))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(RegisterClientButton)
-                    .addComponent(RegisterEmployeeButton)
-                    .addComponent(RegisterPromotionButton)
-                    .addComponent(RegisterVehicleButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(TopLabel)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ClientLabel)
+                                    .addComponent(EmployeeLabel)
+                                    .addComponent(PromotionLabel))
+                                .addGap(38, 38, 38)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(SearchClientsButton)
+                                    .addComponent(SearchPromotionButton)
+                                    .addComponent(SearchEmployeesButton)
+                                    .addComponent(SearchVehiclesButton)))
+                            .addComponent(VehicleLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(RegisterClientButton)
+                            .addComponent(RegisterEmployeeButton)
+                            .addComponent(RegisterPromotionButton)
+                            .addComponent(RegisterVehicleButton)))
+                    .addComponent(TopLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -236,6 +245,16 @@ public class MainView extends javax.swing.JFrame {
         new EmployeeList(this.userName, this.isManager).setVisible(true);
         dispose();
     }//GEN-LAST:event_SearchEmployeesButtonActionPerformed
+
+    private void SearchPromotionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchPromotionButtonActionPerformed
+        new PromotionList(this.userName, this.isManager).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_SearchPromotionButtonActionPerformed
+
+    private void RegisterPromotionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterPromotionButtonActionPerformed
+        new PromotionRegister(this.userName, this.isManager, "fromMainView").setVisible(true);
+        dispose();
+    }//GEN-LAST:event_RegisterPromotionButtonActionPerformed
 
     /**
      * @param args the command line arguments
