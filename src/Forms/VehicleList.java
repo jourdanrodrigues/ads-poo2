@@ -5,9 +5,7 @@
  */
 package Forms;
 
-import Classes.Client;
 import Classes.Vehicle;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
@@ -36,6 +34,9 @@ public final class VehicleList extends javax.swing.JFrame {
         initComponents();
         
         listVehicles();
+        
+        if (isManager == 0)
+            UpdateButton.setVisible(false);
         
         UserNameLabel.setText(userName + ".");
         

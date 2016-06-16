@@ -33,8 +33,6 @@ public class MainView extends javax.swing.JFrame {
             SearchEmployeesButton.setVisible(false);
             RegisterEmployeeButton.setVisible(false);
             
-            VehicleLabel.setVisible(false);
-            SearchVehiclesButton.setVisible(false);
             RegisterVehicleButton.setVisible(false);
         }
     }
