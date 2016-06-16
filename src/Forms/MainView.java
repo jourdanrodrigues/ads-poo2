@@ -205,7 +205,7 @@ public class MainView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SearchClientsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchClientsButtonActionPerformed
-        new FormClientList(this.userName, this.isManager).setVisible(true);
+        new ClientList(this.userName, this.isManager).setVisible(true);
         dispose();
     }//GEN-LAST:event_SearchClientsButtonActionPerformed
 
@@ -220,22 +220,22 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchVehiclesButtonActionPerformed
 
     private void RegisterClientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterClientButtonActionPerformed
-        new FormClientRegister(this.userName, this.isManager, "fromMainView").setVisible(true);
+        new ClientRegister(this.userName, this.isManager, "fromMainView").setVisible(true);
         dispose();
     }//GEN-LAST:event_RegisterClientButtonActionPerformed
 
     private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
-        new FormLogin().setVisible(true);
+        new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_LogoutButtonActionPerformed
 
     private void RegisterEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterEmployeeButtonActionPerformed
-        new FormEmployeeRegister(this.userName, this.isManager, "fromMainView").setVisible(true);
+        new EmployeeRegister(this.userName, this.isManager, "fromMainView").setVisible(true);
         dispose();
     }//GEN-LAST:event_RegisterEmployeeButtonActionPerformed
 
     private void SearchEmployeesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchEmployeesButtonActionPerformed
-        new FormEmployeeList(this.userName, this.isManager).setVisible(true);
+        new EmployeeList(this.userName, this.isManager).setVisible(true);
         dispose();
     }//GEN-LAST:event_SearchEmployeesButtonActionPerformed
 

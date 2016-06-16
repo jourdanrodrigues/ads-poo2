@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author jourdanrodrigues
  */
-public class FormClientRegister extends javax.swing.JFrame {
+public class ClientRegister extends javax.swing.JFrame {
     String userName;
     String from;
     int isManager;
@@ -22,11 +22,11 @@ public class FormClientRegister extends javax.swing.JFrame {
     /**
      * Creates new form FormClientRegister
      */
-    public FormClientRegister() {
+    public ClientRegister() {
         initComponents();
     }
 
-    public FormClientRegister(String userName, int isManager, String from) {
+    public ClientRegister(String userName, int isManager, String from) {
         this.userName = userName;
         this.isManager = isManager;
         this.from = from;
@@ -326,7 +326,7 @@ public class FormClientRegister extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, operationResponse[1]);
             
             if (operationResponse[0].equals("success")){
-                new FormClientList(this.userName, this.isManager).setVisible(true);
+                new ClientList(this.userName, this.isManager).setVisible(true);
                 dispose();
             }
         }
@@ -344,12 +344,12 @@ public class FormClientRegister extends javax.swing.JFrame {
         if (this.from.equals("fromMainView"))
             new MainView(this.userName, this.isManager).setVisible(true);
         else if (this.from.equals("fromFormClientList"))
-            new FormClientList(this.userName, this.isManager).setVisible(true);
+            new ClientList(this.userName, this.isManager).setVisible(true);
         dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
-        new FormLogin().setVisible(true);
+        new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_LogoutButtonActionPerformed
 
@@ -373,7 +373,7 @@ public class FormClientRegister extends javax.swing.JFrame {
                 InstantiationException |
                 IllegalAccessException |
                 javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormEmployeeRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EmployeeRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         
@@ -382,7 +382,7 @@ public class FormClientRegister extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormEmployeeRegister().setVisible(true);
+                new EmployeeRegister().setVisible(true);
             }
         });
     }

@@ -16,12 +16,12 @@ import javax.swing.JOptionPane;
  *
  * @author jourdanrodrigues
  */
-public class FormLogin extends javax.swing.JDialog {
+public class Login extends javax.swing.JDialog {
 
     /**
      * Creates new form FormCliente
      */
-    public FormLogin() {
+    public Login() {
         initComponents();
     }
 
@@ -167,15 +167,17 @@ public class FormLogin extends javax.swing.JDialog {
                 InstantiationException |
                 IllegalAccessException |
                 javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FormLogin dialog = new FormLogin();
+                Login dialog = new Login();
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

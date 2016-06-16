@@ -1,9 +1,9 @@
-import Forms.FormLogin;
+import Forms.Login;
 
 public class Main {
     
     public static void main(String[] args) {
-        new FormLogin().setVisible(true);
+        new Login().setVisible(true);
     }
 
 }

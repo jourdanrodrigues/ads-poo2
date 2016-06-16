@@ -199,7 +199,7 @@ public final class VehicleList extends javax.swing.JFrame {
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
-        new FormLogin().setVisible(true);
+        new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_LogoutButtonActionPerformed
 

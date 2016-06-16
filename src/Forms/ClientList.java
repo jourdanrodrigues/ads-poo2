@@ -5,7 +5,7 @@
  */
 package Forms;
 
-import Classes.Employee;
+import Classes.Client;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -17,60 +17,51 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jourdanrodrigues
  */
-public final class FormEmployeeList extends javax.swing.JFrame {
+public final class ClientList extends javax.swing.JDialog {
     String userName;
     int isManager;
 
     /**
-     * Creates new form FormEmployeeList
+     * Creates new form FormConsulta
      */
-    public FormEmployeeList() {
+    public ClientList() {
         initComponents();
     }
     
-    public FormEmployeeList(String userName, int isManager) {
+    public ClientList(String userName, int isManager){
         this.userName = userName;
         this.isManager = isManager;
         
         initComponents();
         
+        listClients();
+        
         UserNameLabel.setText(userName + ".");
         
-        listEmployees();
-        
-        EmployeeNameField.getDocument().addDocumentListener(new DocumentListener() {
+        ClientNameField.getDocument().addDocumentListener(new DocumentListener() {
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                listEmployees();
+                listClients();
             }
 
             @Override
             public void insertUpdate(DocumentEvent e) {
-                listEmployees();
+                listClients();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                listEmployees();
+                listClients();
             }
         });
     }
             
-    public void listEmployees(){
+    public void listClients(){
         try {
-            
-            ResultSet rs = Employee.getEmployeeList(EmployeeNameField.getText());
-
-            DefaultTableModel employeesList = (DefaultTableModel) EmployeesList.getModel();
-
-            employeesList.setNumRows(0);
-
-            while (rs.next())
-                employeesList.addRow(new Object[]{rs.getString("nome")});
-
+            Client.getClientList(ClientNameField.getText(), (DefaultTableModel) ClientsList.getModel());
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex.getMessage());
         }
     }
 
@@ -83,41 +74,23 @@ public final class FormEmployeeList extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        EmployeeRegisterButton = new javax.swing.JButton();
-        UserNameLabel = new javax.swing.JLabel();
-        LogoutButton = new javax.swing.JButton();
         TopLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        EmployeesList = new javax.swing.JTable();
+        ClientsList = new javax.swing.JTable();
         ClientNameLabel = new javax.swing.JLabel();
-        EmployeeNameField = new javax.swing.JTextField();
+        ClientNameField = new javax.swing.JTextField();
+        RegisterButton = new javax.swing.JButton();
         BackButton = new javax.swing.JButton();
+        UserNameLabel = new javax.swing.JLabel();
+        LogoutButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        EmployeeRegisterButton.setText("Cadastrar Funcionário");
-        EmployeeRegisterButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmployeeRegisterButtonActionPerformed(evt);
-            }
-        });
-
-        UserNameLabel.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
-        UserNameLabel.setText("Não conseguimos obter seu nome.");
-
-        LogoutButton.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
-        LogoutButton.setText("Logout");
-        LogoutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoutButtonActionPerformed(evt);
-            }
-        });
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         TopLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         TopLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TopLabel.setText("Pesquisa de Funcionários");
+        TopLabel.setText("Pesquisa de Clientes");
 
-        EmployeesList.setModel(new javax.swing.table.DefaultTableModel(
+        ClientsList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -136,14 +109,21 @@ public final class FormEmployeeList extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(EmployeesList);
+        jScrollPane1.setViewportView(ClientsList);
 
         ClientNameLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         ClientNameLabel.setText("NOME");
 
-        EmployeeNameField.addActionListener(new java.awt.event.ActionListener() {
+        ClientNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmployeeNameFieldActionPerformed(evt);
+                ClientNameFieldActionPerformed(evt);
+            }
+        });
+
+        RegisterButton.setText("Cadastrar Cliente");
+        RegisterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegisterButtonActionPerformed(evt);
             }
         });
 
@@ -154,20 +134,31 @@ public final class FormEmployeeList extends javax.swing.JFrame {
             }
         });
 
+        UserNameLabel.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
+        UserNameLabel.setText("Não conseguimos obter seu nome.");
+
+        LogoutButton.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
+        LogoutButton.setText("Logout");
+        LogoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
+                .addContainerGap(66, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(TopLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(ClientNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(EmployeeNameField))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
-                    .addComponent(EmployeeRegisterButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE))
+                        .addComponent(ClientNameField))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                    .addComponent(RegisterButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE))
                 .addContainerGap(63, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(BackButton)
@@ -189,35 +180,35 @@ public final class FormEmployeeList extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ClientNameLabel)
-                    .addComponent(EmployeeNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ClientNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(EmployeeRegisterButton)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addComponent(RegisterButton)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void EmployeeRegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeRegisterButtonActionPerformed
-        new FormEmployeeRegister(this.userName, this.isManager, "fromFormEmployeeList").setVisible(true);
+    private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
+        new ClientRegister(this.userName, this.isManager, "fromFormClientList").setVisible(true);
         dispose();
-    }//GEN-LAST:event_EmployeeRegisterButtonActionPerformed
-
-    private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
-        new FormLogin().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_LogoutButtonActionPerformed
-
-    private void EmployeeNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeNameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EmployeeNameFieldActionPerformed
+    }//GEN-LAST:event_RegisterButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         new MainView(this.userName, this.isManager).setVisible(true);
         dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
+
+    private void ClientNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientNameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ClientNameFieldActionPerformed
+
+    private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
+        new Login().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_LogoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,31 +227,45 @@ public final class FormEmployeeList extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormEmployeeList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormEmployeeList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormEmployeeList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormEmployeeList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormEmployeeList().setVisible(true);
+                ClientList dialog = new ClientList();
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackButton;
+    private javax.swing.JTextField ClientNameField;
     private javax.swing.JLabel ClientNameLabel;
-    private javax.swing.JTextField EmployeeNameField;
-    private javax.swing.JButton EmployeeRegisterButton;
-    private javax.swing.JTable EmployeesList;
+    private javax.swing.JTable ClientsList;
     private javax.swing.JButton LogoutButton;
+    private javax.swing.JButton RegisterButton;
     private javax.swing.JLabel TopLabel;
     private javax.swing.JLabel UserNameLabel;
     private javax.swing.JScrollPane jScrollPane1;
