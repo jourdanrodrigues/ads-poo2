@@ -31,17 +31,17 @@
               <Component id="LogoutButton" min="-2" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="NameLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="NameTextField" min="-2" pref="246" max="-2" attributes="0"/>
+                          <Component id="NameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="NameTextField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="EmailLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="EmailTextField" max="32767" attributes="0"/>
+                          <Component id="EmailLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="EmailTextField" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="2" attributes="0">
@@ -51,8 +51,8 @@
                       </Group>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="PhoneTextField" min="-2" pref="246" max="-2" attributes="0"/>
-                          <Component id="PhoneLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="PhoneTextField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
+                          <Component id="PhoneLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="2" attributes="0">
@@ -62,32 +62,29 @@
                       </Group>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="AddressLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="AddressTextField" min="-2" pref="246" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="2" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="PisNumberLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="AccessNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="AccessNameTextField" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
-                          <Component id="PisNumberTextField" min="-2" pref="250" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="PasswordLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="PasswordConfirmationLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="PasswordField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
-                          <Component id="PasswordConfirmationField" min="-2" pref="246" max="-2" attributes="0"/>
+                          <Component id="AddressLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="AddressTextField" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="RegisterButton" min="-2" pref="248" max="-2" attributes="0"/>
+                      <Component id="UpdateButton" min="-2" pref="248" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="IsManagerCheckBox" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="AccessNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="AccessNameTextField" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="PisNumberLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="PisNumberTextField" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -104,10 +101,11 @@
                   <Component id="UserNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BackButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
               <Component id="TopLabel" min="-2" pref="22" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="PisNumberTextField" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="NameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -138,47 +136,70 @@
                           <Component id="RGTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="AddressTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="AccessNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="PasswordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="AccessNameLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="AccessNameTextField" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="PisNumberLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="AccessNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="PasswordField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="PasswordConfirmationLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="PasswordConfirmationField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="PisNumberTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="PisNumberLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="RegisterButton" min="-2" pref="49" max="-2" attributes="0"/>
-                  <Component id="IsManagerCheckBox" min="-2" max="-2" attributes="0"/>
+                  <Component id="UpdateButton" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
+                  <Component id="IsManagerCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="41" max="32767" attributes="0"/>
+              <EmptySpace pref="29" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
+    <Component class="javax.swing.JButton" name="UpdateButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ATUALIZAR"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="UserNameLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Ubuntu" size="11" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="N&#xe3;o conseguimos obter seu nome."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="LogoutButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Ubuntu" size="11" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Logout"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LogoutButtonActionPerformed"/>
+      </Events>
+    </Component>
     <Component class="javax.swing.JLabel" name="TopLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Cadastro de Usu&#xe1;rio"/>
+        <Property name="text" type="java.lang.String" value="Atualiza&#xe7;&#xe3;o de Usu&#xe1;rio"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="BackButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Voltar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BackButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="NameLabel">
       <Properties>
@@ -188,10 +209,23 @@
         <Property name="text" type="java.lang.String" value="NOME"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JCheckBox" name="IsManagerCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Usu&#xe1;rio gerente"/>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JTextField" name="NameTextField">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NameTextFieldActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="PisNumberLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="N&#xda;MERO DO PIS"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="EmailLabel">
       <Properties>
@@ -200,6 +234,14 @@
         </Property>
         <Property name="text" type="java.lang.String" value="EMAIL"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="PisNumberTextField">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Seu nome de usu&#xe1;rio"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PisNumberTextFieldActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="EmailTextField">
       <Events>
@@ -281,82 +323,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AccessNameTextFieldActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="PasswordLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="11" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="SENHA"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JPasswordField" name="PasswordField">
-    </Component>
-    <Component class="javax.swing.JLabel" name="PasswordConfirmationLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="11" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="A SENHA, DE NOVO"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JPasswordField" name="PasswordConfirmationField">
-    </Component>
-    <Component class="javax.swing.JButton" name="RegisterButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="CADASTRAR"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RegisterButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="UserNameLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Ubuntu" size="11" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="N&#xe3;o conseguimos obter seu nome."/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="LogoutButton">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Ubuntu" size="11" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Logout"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LogoutButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="BackButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Voltar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BackButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="IsManagerCheckBox">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Usu&#xe1;rio gerente"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="PisNumberLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="11" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="N&#xda;MERO DO PIS"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="PisNumberTextField">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Seu nome de usu&#xe1;rio"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PisNumberTextFieldActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

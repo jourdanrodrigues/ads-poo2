@@ -60,7 +60,7 @@ public final class VehicleList extends javax.swing.JFrame {
             
     public void listVehicles(){
         try {
-            Vehicle.getVehicleList(ModelChassiField.getText(), (DefaultTableModel) ClientsList.getModel());
+            Vehicle.getVehicleList(ModelChassiField.getText(), (DefaultTableModel) VehiclesList.getModel());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex.getMessage());
         }
@@ -80,10 +80,11 @@ public final class VehicleList extends javax.swing.JFrame {
         LogoutButton = new javax.swing.JButton();
         TopLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        ClientsList = new javax.swing.JTable();
+        VehiclesList = new javax.swing.JTable();
         ClientNameLabel = new javax.swing.JLabel();
         ModelChassiField = new javax.swing.JTextField();
         RegisterButton = new javax.swing.JButton();
+        UpdateButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,26 +110,36 @@ public final class VehicleList extends javax.swing.JFrame {
         TopLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TopLabel.setText("Pesquisa de Veículos");
 
-        ClientsList.setModel(new javax.swing.table.DefaultTableModel(
+        VehiclesList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "MODELO", "COR", "CHASSI", "PREÇO (R$)"
+                "ID", "MODELO", "COR", "CHASSI", "PREÇO (R$)"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jScrollPane1.setViewportView(ClientsList);
+        jScrollPane1.setViewportView(VehiclesList);
+        if (VehiclesList.getColumnModel().getColumnCount() > 0) {
+            VehiclesList.getColumnModel().getColumn(0).setPreferredWidth(15);
+        }
 
         ClientNameLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         ClientNameLabel.setText("MODELO / CHASSI");
@@ -146,6 +157,13 @@ public final class VehicleList extends javax.swing.JFrame {
             }
         });
 
+        UpdateButton.setText("Atualizar Veículo");
+        UpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,13 +172,18 @@ public final class VehicleList extends javax.swing.JFrame {
                 .addContainerGap(56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(TopLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(ClientNameLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ModelChassiField, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(RegisterButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(ClientNameLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ModelChassiField, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(RegisterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(55, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(BackButton)
@@ -186,7 +209,9 @@ public final class VehicleList extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(RegisterButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RegisterButton)
+                    .addComponent(UpdateButton))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -211,6 +236,12 @@ public final class VehicleList extends javax.swing.JFrame {
         new VehicleRegister(this.userName, this.isManager, "fromVehicleList").setVisible(true);
         dispose();
     }//GEN-LAST:event_RegisterButtonActionPerformed
+
+    private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
+        String vehicleId = (String) VehiclesList.getModel().getValueAt(VehiclesList.getSelectedRow(), 0);
+        new VehicleUpdate(this.userName, this.isManager, vehicleId).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_UpdateButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,12 +281,13 @@ public final class VehicleList extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackButton;
     private javax.swing.JLabel ClientNameLabel;
-    private javax.swing.JTable ClientsList;
     private javax.swing.JButton LogoutButton;
     private javax.swing.JTextField ModelChassiField;
     private javax.swing.JButton RegisterButton;
     private javax.swing.JLabel TopLabel;
+    private javax.swing.JButton UpdateButton;
     private javax.swing.JLabel UserNameLabel;
+    private javax.swing.JTable VehiclesList;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

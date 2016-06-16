@@ -14,13 +14,13 @@ import java.sql.SQLException;
  * @author jourdanrodrigues
  */
 public class DBConnection {
-    String
-            host = "jdbc:mysql://localhost/Poo2Homework",
-            user = "root",
-            password = "";
     
-    public Connection getConnection() throws ClassNotFoundException, SQLException{
+    public static Connection getConnection() throws ClassNotFoundException, SQLException{
+        String
+                host = "jdbc:mysql://localhost/Poo2Homework",
+                user = "root",
+                password = "";
         Class.forName("com.mysql.jdbc.Driver");
-        return DriverManager.getConnection(this.host, this.user, this.password);
+        return DriverManager.getConnection(host, user, password);
     }
 }

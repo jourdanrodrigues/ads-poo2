@@ -6,7 +6,6 @@
 package Forms;
 
 import Classes.Client;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
@@ -83,6 +82,7 @@ public final class ClientList extends javax.swing.JDialog {
         BackButton = new javax.swing.JButton();
         UserNameLabel = new javax.swing.JLabel();
         LogoutButton = new javax.swing.JButton();
+        UpdateButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -92,24 +92,34 @@ public final class ClientList extends javax.swing.JDialog {
 
         ClientsList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "NOME"
+                "ID", "NOME"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane1.setViewportView(ClientsList);
+        if (ClientsList.getColumnModel().getColumnCount() > 0) {
+            ClientsList.getColumnModel().getColumn(0).setPreferredWidth(15);
+        }
 
         ClientNameLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         ClientNameLabel.setText("NOME");
@@ -145,12 +155,19 @@ public final class ClientList extends javax.swing.JDialog {
             }
         });
 
+        UpdateButton.setText("Atualizar Cliente");
+        UpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(66, Short.MAX_VALUE)
+                .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(TopLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -158,8 +175,11 @@ public final class ClientList extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ClientNameField))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-                    .addComponent(RegisterButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE))
-                .addContainerGap(63, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(RegisterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(63, 63, 63))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(BackButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -184,7 +204,9 @@ public final class ClientList extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(RegisterButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RegisterButton)
+                    .addComponent(UpdateButton))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -209,6 +231,12 @@ public final class ClientList extends javax.swing.JDialog {
         new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_LogoutButtonActionPerformed
+
+    private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
+        String clientId = (String) ClientsList.getModel().getValueAt(ClientsList.getSelectedRow(), 0);
+        new ClientUpdate(this.userName, this.isManager, clientId).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_UpdateButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,6 +295,7 @@ public final class ClientList extends javax.swing.JDialog {
     private javax.swing.JButton LogoutButton;
     private javax.swing.JButton RegisterButton;
     private javax.swing.JLabel TopLabel;
+    private javax.swing.JButton UpdateButton;
     private javax.swing.JLabel UserNameLabel;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

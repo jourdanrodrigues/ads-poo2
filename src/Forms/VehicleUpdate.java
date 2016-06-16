@@ -6,6 +6,7 @@
 package Forms;
 
 import Classes.Vehicle;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -14,25 +15,41 @@ import javax.swing.JOptionPane;
  *
  * @author jourdanrodrigues
  */
-public class VehicleRegister extends javax.swing.JFrame {
-    String userName, from;
+public class VehicleUpdate extends javax.swing.JFrame {
+    String userName, vehicleId;
     int isManager;
 
     /**
-     * Creates new form VehicleRegister
+     * Creates new form VehicleUpdate
      */
-    public VehicleRegister() {
+    public VehicleUpdate() {
         initComponents();
     }
     
-    public VehicleRegister(String userName, int isManager, String from) {
-        this.userName = userName;
-        this.isManager = isManager;
-        this.from = from;
+    public VehicleUpdate(String userName, int isManager, String vehicleId) {
+        try {
+            this.userName = userName;
+            this.isManager = isManager;
+            this.vehicleId = vehicleId;
+
+            initComponents();
         
-        initComponents();
+            UserNameLabel.setText(userName + ".");
+            
+            Map<String, String> map = Vehicle.getVehicle(vehicleId);
         
-        UserNameLabel.setText(userName + ".");
+            ModelTextField.setText(map.get("model"));
+            ColorTextField.setText(map.get("color"));
+            ChassisTextField.setText(map.get("chassis"));
+            YearTextField.setText(map.get("year"));
+            ManufacturerTextField.setText(map.get("manufacturer"));
+            CarPriceTextField.setText(map.get("price"));
+        }
+        catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex.getMessage());
+            new VehicleList(userName, isManager).setVisible(true);
+            dispose();
+        }
     }
 
     /**
@@ -44,65 +61,25 @@ public class VehicleRegister extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        TopLabel = new javax.swing.JLabel();
-        CityLabel = new javax.swing.JLabel();
-        FullNameLabel = new javax.swing.JLabel();
-        PriceTextField = new javax.swing.JTextField();
-        ModelTextField = new javax.swing.JTextField();
-        EmailLabel = new javax.swing.JLabel();
-        ChassisTextField = new javax.swing.JTextField();
-        CPFLabel = new javax.swing.JLabel();
-        RegisterButton = new javax.swing.JButton();
         ManufacturerTextField = new javax.swing.JTextField();
         PhoneLabel = new javax.swing.JLabel();
+        TopLabel = new javax.swing.JLabel();
         BackButton = new javax.swing.JButton();
+        CityLabel = new javax.swing.JLabel();
         ColorTextField = new javax.swing.JTextField();
+        FullNameLabel = new javax.swing.JLabel();
         UserNameLabel = new javax.swing.JLabel();
         RGLabel = new javax.swing.JLabel();
+        ModelTextField = new javax.swing.JTextField();
         LogoutButton = new javax.swing.JButton();
+        EmailLabel = new javax.swing.JLabel();
         YearTextField = new javax.swing.JTextField();
+        ChassisTextField = new javax.swing.JTextField();
+        CPFLabel = new javax.swing.JLabel();
+        UpdateButton = new javax.swing.JButton();
+        CarPriceTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        TopLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        TopLabel.setText("Cadastro de Veículo");
-
-        CityLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        CityLabel.setText("PREÇO");
-
-        FullNameLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        FullNameLabel.setText("MODELO");
-
-        PriceTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PriceTextFieldActionPerformed(evt);
-            }
-        });
-
-        ModelTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModelTextFieldActionPerformed(evt);
-            }
-        });
-
-        EmailLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        EmailLabel.setText("CHASSI");
-
-        ChassisTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChassisTextFieldActionPerformed(evt);
-            }
-        });
-
-        CPFLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        CPFLabel.setText("FABRICANTE");
-
-        RegisterButton.setText("CADASTRAR");
-        RegisterButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegisterButtonActionPerformed(evt);
-            }
-        });
 
         ManufacturerTextField.setToolTipText("Somente números");
         ManufacturerTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -114,12 +91,18 @@ public class VehicleRegister extends javax.swing.JFrame {
         PhoneLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         PhoneLabel.setText("COR");
 
+        TopLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TopLabel.setText("Atualização de Veículo");
+
         BackButton.setText("Voltar");
         BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackButtonActionPerformed(evt);
             }
         });
+
+        CityLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        CityLabel.setText("PREÇO");
 
         ColorTextField.setToolTipText("Somente números");
         ColorTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -128,11 +111,20 @@ public class VehicleRegister extends javax.swing.JFrame {
             }
         });
 
+        FullNameLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        FullNameLabel.setText("MODELO");
+
         UserNameLabel.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
         UserNameLabel.setText("Não conseguimos obter seu nome.");
 
         RGLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         RGLabel.setText("ANO");
+
+        ModelTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModelTextFieldActionPerformed(evt);
+            }
+        });
 
         LogoutButton.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
         LogoutButton.setText("Logout");
@@ -142,10 +134,36 @@ public class VehicleRegister extends javax.swing.JFrame {
             }
         });
 
+        EmailLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        EmailLabel.setText("CHASSI");
+
         YearTextField.setToolTipText("Somente números");
         YearTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 YearTextFieldActionPerformed(evt);
+            }
+        });
+
+        ChassisTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChassisTextFieldActionPerformed(evt);
+            }
+        });
+
+        CPFLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        CPFLabel.setText("FABRICANTE");
+
+        UpdateButton.setText("ATUALIZAR");
+        UpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateButtonActionPerformed(evt);
+            }
+        });
+
+        CarPriceTextField.setToolTipText("Somente números");
+        CarPriceTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CarPriceTextFieldActionPerformed(evt);
             }
         });
 
@@ -154,36 +172,38 @@ public class VehicleRegister extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(FullNameLabel)
-                                .addComponent(ModelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(EmailLabel)
-                                .addComponent(ChassisTextField)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(FullNameLabel)
+                            .addComponent(ModelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(EmailLabel)
+                            .addComponent(ChassisTextField)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ManufacturerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CPFLabel))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ManufacturerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CPFLabel))
                                 .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ColorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(PhoneLabel)))
+                                .addComponent(PhoneLabel))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(YearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(RGLabel))
-                                .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CityLabel)
-                                    .addComponent(PriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(RegisterButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                                .addGap(12, 12, 12)
+                                .addComponent(ColorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(2, 2, 2))
+                    .addComponent(UpdateButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(YearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RGLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CityLabel)
+                            .addComponent(CarPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(BackButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -228,28 +248,46 @@ public class VehicleRegister extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(YearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CarPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(RegisterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void PriceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PriceTextFieldActionPerformed
+    private void ManufacturerTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManufacturerTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_PriceTextFieldActionPerformed
+    }//GEN-LAST:event_ManufacturerTextFieldActionPerformed
+
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        new VehicleList(this.userName, this.isManager).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_BackButtonActionPerformed
+
+    private void ColorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColorTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ColorTextFieldActionPerformed
 
     private void ModelTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModelTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ModelTextFieldActionPerformed
 
+    private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
+        new Login().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_LogoutButtonActionPerformed
+
+    private void YearTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YearTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_YearTextFieldActionPerformed
+
     private void ChassisTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChassisTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ChassisTextFieldActionPerformed
 
-    private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
+    private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
 
         try {
             Map<String, String> map = new HashMap<>();
@@ -259,10 +297,11 @@ public class VehicleRegister extends javax.swing.JFrame {
             map.put("color", ColorTextField.getText());
             map.put("year", YearTextField.getText());
             map.put("model", ModelTextField.getText());
-            map.put("price", PriceTextField.getText());
+            map.put("price", CarPriceTextField.getText());
+            map.put("id", this.vehicleId);
 
             Vehicle vehicle = new Vehicle(map);
-            String [] operationResponse = vehicle.registerVehicle();
+            String [] operationResponse = vehicle.updateVehicle();
 
             JOptionPane.showMessageDialog(null, operationResponse[1]);
 
@@ -274,32 +313,11 @@ public class VehicleRegister extends javax.swing.JFrame {
         catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-    }//GEN-LAST:event_RegisterButtonActionPerformed
+    }//GEN-LAST:event_UpdateButtonActionPerformed
 
-    private void ManufacturerTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManufacturerTextFieldActionPerformed
+    private void CarPriceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarPriceTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ManufacturerTextFieldActionPerformed
-
-    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        if (this.from.equals("fromMainView"))
-            new MainView(this.userName, this.isManager).setVisible(true);
-        else if (this.from.equals("fromVehicleList"))
-            new VehicleList(this.userName, this.isManager).setVisible(true);
-        dispose();
-    }//GEN-LAST:event_BackButtonActionPerformed
-
-    private void ColorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColorTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ColorTextFieldActionPerformed
-
-    private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
-        new Login().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_LogoutButtonActionPerformed
-
-    private void YearTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YearTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_YearTextFieldActionPerformed
+    }//GEN-LAST:event_CarPriceTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,20 +336,20 @@ public class VehicleRegister extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VehicleRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VehicleRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VehicleRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VehicleRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VehicleRegister().setVisible(true);
+                new VehicleUpdate().setVisible(true);
             }
         });
     }
@@ -339,6 +357,7 @@ public class VehicleRegister extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackButton;
     private javax.swing.JLabel CPFLabel;
+    private javax.swing.JTextField CarPriceTextField;
     private javax.swing.JTextField ChassisTextField;
     private javax.swing.JLabel CityLabel;
     private javax.swing.JTextField ColorTextField;
@@ -349,9 +368,10 @@ public class VehicleRegister extends javax.swing.JFrame {
     private javax.swing.JTextField ModelTextField;
     private javax.swing.JLabel PhoneLabel;
     private javax.swing.JTextField PriceTextField;
+    private javax.swing.JTextField PriceTextField1;
     private javax.swing.JLabel RGLabel;
-    private javax.swing.JButton RegisterButton;
     private javax.swing.JLabel TopLabel;
+    private javax.swing.JButton UpdateButton;
     private javax.swing.JLabel UserNameLabel;
     private javax.swing.JTextField YearTextField;
     // End of variables declaration//GEN-END:variables

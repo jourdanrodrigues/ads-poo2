@@ -59,16 +59,7 @@ public final class EmployeeList extends javax.swing.JFrame {
             
     public void listEmployees(){
         try {
-            
-            ResultSet rs = Employee.getEmployeeList(EmployeeNameField.getText());
-
-            DefaultTableModel employeesList = (DefaultTableModel) EmployeesList.getModel();
-
-            employeesList.setNumRows(0);
-
-            while (rs.next())
-                employeesList.addRow(new Object[]{rs.getString("nome")});
-
+            Employee.getEmployeeList(EmployeeNameField.getText(), (DefaultTableModel) EmployeesList.getModel());
         } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex.getMessage());
         }
@@ -92,6 +83,7 @@ public final class EmployeeList extends javax.swing.JFrame {
         ClientNameLabel = new javax.swing.JLabel();
         EmployeeNameField = new javax.swing.JTextField();
         BackButton = new javax.swing.JButton();
+        EmployeeUpdateButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,24 +111,34 @@ public final class EmployeeList extends javax.swing.JFrame {
 
         EmployeesList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "NOME"
+                "ID", "NOME"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane1.setViewportView(EmployeesList);
+        if (EmployeesList.getColumnModel().getColumnCount() > 0) {
+            EmployeesList.getColumnModel().getColumn(0).setPreferredWidth(15);
+        }
 
         ClientNameLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         ClientNameLabel.setText("NOME");
@@ -154,20 +156,30 @@ public final class EmployeeList extends javax.swing.JFrame {
             }
         });
 
+        EmployeeUpdateButton.setText("Atualizar Funcionário");
+        EmployeeUpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmployeeUpdateButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
+                .addContainerGap(62, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(TopLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(ClientNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(EmployeeNameField))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
-                    .addComponent(EmployeeRegisterButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(EmployeeRegisterButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(EmployeeUpdateButton)))
                 .addContainerGap(63, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(BackButton)
@@ -193,7 +205,9 @@ public final class EmployeeList extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(EmployeeRegisterButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EmployeeRegisterButton)
+                    .addComponent(EmployeeUpdateButton))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -218,6 +232,12 @@ public final class EmployeeList extends javax.swing.JFrame {
         new MainView(this.userName, this.isManager).setVisible(true);
         dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
+
+    private void EmployeeUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeUpdateButtonActionPerformed
+        String employeeId = (String) EmployeesList.getModel().getValueAt(EmployeesList.getSelectedRow(), 0);
+        new EmployeeUpdate(this.userName, this.isManager, employeeId).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_EmployeeUpdateButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,6 +280,7 @@ public final class EmployeeList extends javax.swing.JFrame {
     private javax.swing.JLabel ClientNameLabel;
     private javax.swing.JTextField EmployeeNameField;
     private javax.swing.JButton EmployeeRegisterButton;
+    private javax.swing.JButton EmployeeUpdateButton;
     private javax.swing.JTable EmployeesList;
     private javax.swing.JButton LogoutButton;
     private javax.swing.JLabel TopLabel;
