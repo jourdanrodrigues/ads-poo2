@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -32,6 +33,9 @@ public class Vehicle {
                 map.get("year").isEmpty() ||
                 map.get("price").isEmpty())
             throw new IllegalArgumentException("Todos os campos são obrigatórios!");
+        
+        if (map.get("chassis").length() != 17)
+            throw new IllegalArgumentException("O chassi deve conter 17 caracteres!");
         
         this.model = map.get("model");
         this.manufacturer = map.get("manufacturer");

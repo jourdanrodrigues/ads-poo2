@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Forms;
+package Forms.Client;
 
 import Classes.Client;
+import Forms.Login;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;

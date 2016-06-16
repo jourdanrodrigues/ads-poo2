@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Forms;
+package Forms.Vehicle;
 
-import Classes.Employee;
+import Classes.Vehicle;
+import Forms.Login;
+import Forms.MainView;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
@@ -16,51 +18,54 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jourdanrodrigues
  */
-public final class EmployeeList extends javax.swing.JFrame {
+public final class VehicleList extends javax.swing.JFrame {
     String userName;
     int isManager;
 
     /**
-     * Creates new form FormEmployeeList
+     * Creates new form VehicleList
      */
-    public EmployeeList() {
+    public VehicleList() {
         initComponents();
     }
     
-    public EmployeeList(String userName, int isManager) {
+    public VehicleList(String userName, int isManager){
         this.userName = userName;
         this.isManager = isManager;
         
         initComponents();
         
+        listVehicles();
+        
+        if (isManager == 0)
+            UpdateButton.setVisible(false);
+        
         UserNameLabel.setText(userName + ".");
         
-        listEmployees();
-        
-        EmployeeNameField.getDocument().addDocumentListener(new DocumentListener() {
+        ModelChassiField.getDocument().addDocumentListener(new DocumentListener() {
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                listEmployees();
+                listVehicles();
             }
 
             @Override
             public void insertUpdate(DocumentEvent e) {
-                listEmployees();
+                listVehicles();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                listEmployees();
+                listVehicles();
             }
         });
     }
             
-    public void listEmployees(){
+    public void listVehicles(){
         try {
-            Employee.getEmployeeList(EmployeeNameField.getText(), (DefaultTableModel) EmployeesList.getModel());
+            Vehicle.getVehicleList(ModelChassiField.getText(), (DefaultTableModel) VehiclesList.getModel());
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex.getMessage());
         }
     }
 
@@ -73,23 +78,23 @@ public final class EmployeeList extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        EmployeeRegisterButton = new javax.swing.JButton();
+        BackButton = new javax.swing.JButton();
         UserNameLabel = new javax.swing.JLabel();
         LogoutButton = new javax.swing.JButton();
         TopLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        EmployeesList = new javax.swing.JTable();
+        VehiclesList = new javax.swing.JTable();
         ClientNameLabel = new javax.swing.JLabel();
-        EmployeeNameField = new javax.swing.JTextField();
-        BackButton = new javax.swing.JButton();
-        EmployeeUpdateButton = new javax.swing.JButton();
+        ModelChassiField = new javax.swing.JTextField();
+        RegisterButton = new javax.swing.JButton();
+        UpdateButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        EmployeeRegisterButton.setText("Cadastrar Funcionário");
-        EmployeeRegisterButton.addActionListener(new java.awt.event.ActionListener() {
+        BackButton.setText("Voltar");
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmployeeRegisterButtonActionPerformed(evt);
+                BackButtonActionPerformed(evt);
             }
         });
 
@@ -106,24 +111,24 @@ public final class EmployeeList extends javax.swing.JFrame {
 
         TopLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         TopLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TopLabel.setText("Pesquisa de Funcionários");
+        TopLabel.setText("Pesquisa de Veículos");
 
-        EmployeesList.setModel(new javax.swing.table.DefaultTableModel(
+        VehiclesList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "NOME"
+                "ID", "MODELO", "COR", "CHASSI", "PREÇO (R$)"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -134,31 +139,31 @@ public final class EmployeeList extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(EmployeesList);
-        if (EmployeesList.getColumnModel().getColumnCount() > 0) {
-            EmployeesList.getColumnModel().getColumn(0).setPreferredWidth(15);
+        jScrollPane1.setViewportView(VehiclesList);
+        if (VehiclesList.getColumnModel().getColumnCount() > 0) {
+            VehiclesList.getColumnModel().getColumn(0).setPreferredWidth(15);
         }
 
         ClientNameLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        ClientNameLabel.setText("NOME");
+        ClientNameLabel.setText("MODELO / CHASSI");
 
-        EmployeeNameField.addActionListener(new java.awt.event.ActionListener() {
+        ModelChassiField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmployeeNameFieldActionPerformed(evt);
+                ModelChassiFieldActionPerformed(evt);
             }
         });
 
-        BackButton.setText("Voltar");
-        BackButton.addActionListener(new java.awt.event.ActionListener() {
+        RegisterButton.setText("Cadastrar Veículo");
+        RegisterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackButtonActionPerformed(evt);
+                RegisterButtonActionPerformed(evt);
             }
         });
 
-        EmployeeUpdateButton.setText("Atualizar Funcionário");
-        EmployeeUpdateButton.addActionListener(new java.awt.event.ActionListener() {
+        UpdateButton.setText("Atualizar Veículo");
+        UpdateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmployeeUpdateButtonActionPerformed(evt);
+                UpdateButtonActionPerformed(evt);
             }
         });
 
@@ -167,22 +172,25 @@ public final class EmployeeList extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(62, Short.MAX_VALUE)
+                .addContainerGap(56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(TopLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(ClientNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(EmployeeNameField))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(EmployeeRegisterButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(EmployeeUpdateButton)))
-                .addContainerGap(63, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(ClientNameLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ModelChassiField, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(RegisterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(55, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(BackButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
                 .addComponent(UserNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LogoutButton))
@@ -200,43 +208,43 @@ public final class EmployeeList extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ClientNameLabel)
-                    .addComponent(EmployeeNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ModelChassiField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(EmployeeRegisterButton)
-                    .addComponent(EmployeeUpdateButton))
+                    .addComponent(RegisterButton)
+                    .addComponent(UpdateButton))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void EmployeeRegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeRegisterButtonActionPerformed
-        new EmployeeRegister(this.userName, this.isManager, "fromFormEmployeeList").setVisible(true);
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        new MainView(this.userName, this.isManager).setVisible(true);
         dispose();
-    }//GEN-LAST:event_EmployeeRegisterButtonActionPerformed
+    }//GEN-LAST:event_BackButtonActionPerformed
 
     private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
         new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_LogoutButtonActionPerformed
 
-    private void EmployeeNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeNameFieldActionPerformed
+    private void ModelChassiFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModelChassiFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_EmployeeNameFieldActionPerformed
+    }//GEN-LAST:event_ModelChassiFieldActionPerformed
 
-    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        new MainView(this.userName, this.isManager).setVisible(true);
+    private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
+        new VehicleRegister(this.userName, this.isManager, "fromVehicleList").setVisible(true);
         dispose();
-    }//GEN-LAST:event_BackButtonActionPerformed
+    }//GEN-LAST:event_RegisterButtonActionPerformed
 
-    private void EmployeeUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeUpdateButtonActionPerformed
-        String employeeId = (String) EmployeesList.getModel().getValueAt(EmployeesList.getSelectedRow(), 0);
-        new EmployeeUpdate(this.userName, this.isManager, employeeId).setVisible(true);
+    private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
+        String vehicleId = (String) VehiclesList.getModel().getValueAt(VehiclesList.getSelectedRow(), 0);
+        new VehicleUpdate(this.userName, this.isManager, vehicleId).setVisible(true);
         dispose();
-    }//GEN-LAST:event_EmployeeUpdateButtonActionPerformed
+    }//GEN-LAST:event_UpdateButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,21 +263,20 @@ public final class EmployeeList extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EmployeeList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EmployeeList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EmployeeList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EmployeeList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VehicleList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EmployeeList().setVisible(true);
+                new VehicleList().setVisible(true);
             }
         });
     }
@@ -277,13 +284,13 @@ public final class EmployeeList extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackButton;
     private javax.swing.JLabel ClientNameLabel;
-    private javax.swing.JTextField EmployeeNameField;
-    private javax.swing.JButton EmployeeRegisterButton;
-    private javax.swing.JButton EmployeeUpdateButton;
-    private javax.swing.JTable EmployeesList;
     private javax.swing.JButton LogoutButton;
+    private javax.swing.JTextField ModelChassiField;
+    private javax.swing.JButton RegisterButton;
     private javax.swing.JLabel TopLabel;
+    private javax.swing.JButton UpdateButton;
     private javax.swing.JLabel UserNameLabel;
+    private javax.swing.JTable VehiclesList;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

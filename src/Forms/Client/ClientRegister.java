@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Forms;
+package Forms.Client;
 
 import Classes.Client;
+import Forms.Employee.EmployeeRegister;
+import Forms.Login;
+import Forms.MainView;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;

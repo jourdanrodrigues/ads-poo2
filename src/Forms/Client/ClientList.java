@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Forms;
+package Forms.Client;
 
-import Classes.Vehicle;
+import Classes.Client;
+import Forms.Login;
+import Forms.MainView;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
@@ -16,52 +18,49 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jourdanrodrigues
  */
-public final class VehicleList extends javax.swing.JFrame {
+public final class ClientList extends javax.swing.JDialog {
     String userName;
     int isManager;
 
     /**
-     * Creates new form VehicleList
+     * Creates new form FormConsulta
      */
-    public VehicleList() {
+    public ClientList() {
         initComponents();
     }
     
-    public VehicleList(String userName, int isManager){
+    public ClientList(String userName, int isManager){
         this.userName = userName;
         this.isManager = isManager;
         
         initComponents();
         
-        listVehicles();
-        
-        if (isManager == 0)
-            UpdateButton.setVisible(false);
+        listClients();
         
         UserNameLabel.setText(userName + ".");
         
-        ModelChassiField.getDocument().addDocumentListener(new DocumentListener() {
+        ClientNameField.getDocument().addDocumentListener(new DocumentListener() {
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                listVehicles();
+                listClients();
             }
 
             @Override
             public void insertUpdate(DocumentEvent e) {
-                listVehicles();
+                listClients();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                listVehicles();
+                listClients();
             }
         });
     }
             
-    public void listVehicles(){
+    public void listClients(){
         try {
-            Vehicle.getVehicleList(ModelChassiField.getText(), (DefaultTableModel) VehiclesList.getModel());
+            Client.getClientList(ClientNameField.getText(), (DefaultTableModel) ClientsList.getModel());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex.getMessage());
         }
@@ -76,18 +75,69 @@ public final class VehicleList extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        TopLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ClientsList = new javax.swing.JTable();
+        ClientNameLabel = new javax.swing.JLabel();
+        ClientNameField = new javax.swing.JTextField();
+        RegisterButton = new javax.swing.JButton();
         BackButton = new javax.swing.JButton();
         UserNameLabel = new javax.swing.JLabel();
         LogoutButton = new javax.swing.JButton();
-        TopLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        VehiclesList = new javax.swing.JTable();
-        ClientNameLabel = new javax.swing.JLabel();
-        ModelChassiField = new javax.swing.JTextField();
-        RegisterButton = new javax.swing.JButton();
         UpdateButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        TopLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TopLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TopLabel.setText("Pesquisa de Clientes");
+
+        ClientsList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID", "NOME"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(ClientsList);
+        if (ClientsList.getColumnModel().getColumnCount() > 0) {
+            ClientsList.getColumnModel().getColumn(0).setPreferredWidth(15);
+        }
+
+        ClientNameLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        ClientNameLabel.setText("NOME");
+
+        ClientNameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClientNameFieldActionPerformed(evt);
+            }
+        });
+
+        RegisterButton.setText("Cadastrar Cliente");
+        RegisterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegisterButtonActionPerformed(evt);
+            }
+        });
 
         BackButton.setText("Voltar");
         BackButton.addActionListener(new java.awt.event.ActionListener() {
@@ -107,58 +157,7 @@ public final class VehicleList extends javax.swing.JFrame {
             }
         });
 
-        TopLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        TopLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TopLabel.setText("Pesquisa de Veículos");
-
-        VehiclesList.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "MODELO", "COR", "CHASSI", "PREÇO (R$)"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(VehiclesList);
-        if (VehiclesList.getColumnModel().getColumnCount() > 0) {
-            VehiclesList.getColumnModel().getColumn(0).setPreferredWidth(15);
-        }
-
-        ClientNameLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        ClientNameLabel.setText("MODELO / CHASSI");
-
-        ModelChassiField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModelChassiFieldActionPerformed(evt);
-            }
-        });
-
-        RegisterButton.setText("Cadastrar Veículo");
-        RegisterButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegisterButtonActionPerformed(evt);
-            }
-        });
-
-        UpdateButton.setText("Atualizar Veículo");
+        UpdateButton.setText("Atualizar Cliente");
         UpdateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UpdateButtonActionPerformed(evt);
@@ -170,25 +169,22 @@ public final class VehicleList extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
+                .addContainerGap(66, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(TopLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(ClientNameLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ModelChassiField, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(RegisterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                        .addComponent(ClientNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ClientNameField))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(RegisterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(63, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(BackButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(UserNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LogoutButton))
@@ -206,41 +202,41 @@ public final class VehicleList extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ClientNameLabel)
-                    .addComponent(ModelChassiField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ClientNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RegisterButton)
                     .addComponent(UpdateButton))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
+        new ClientRegister(this.userName, this.isManager, "fromFormClientList").setVisible(true);
+        dispose();
+    }//GEN-LAST:event_RegisterButtonActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         new MainView(this.userName, this.isManager).setVisible(true);
         dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
 
+    private void ClientNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientNameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ClientNameFieldActionPerformed
+
     private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
         new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_LogoutButtonActionPerformed
 
-    private void ModelChassiFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModelChassiFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ModelChassiFieldActionPerformed
-
-    private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
-        new VehicleRegister(this.userName, this.isManager, "fromVehicleList").setVisible(true);
-        dispose();
-    }//GEN-LAST:event_RegisterButtonActionPerformed
-
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
-        String vehicleId = (String) VehiclesList.getModel().getValueAt(VehiclesList.getSelectedRow(), 0);
-        new VehicleUpdate(this.userName, this.isManager, vehicleId).setVisible(true);
+        String clientId = (String) ClientsList.getModel().getValueAt(ClientsList.getSelectedRow(), 0);
+        new ClientUpdate(this.userName, this.isManager, clientId).setVisible(true);
         dispose();
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
@@ -261,34 +257,48 @@ public final class VehicleList extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VehicleList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VehicleList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VehicleList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VehicleList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VehicleList().setVisible(true);
+                ClientList dialog = new ClientList();
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackButton;
+    private javax.swing.JTextField ClientNameField;
     private javax.swing.JLabel ClientNameLabel;
+    private javax.swing.JTable ClientsList;
     private javax.swing.JButton LogoutButton;
-    private javax.swing.JTextField ModelChassiField;
     private javax.swing.JButton RegisterButton;
     private javax.swing.JLabel TopLabel;
     private javax.swing.JButton UpdateButton;
     private javax.swing.JLabel UserNameLabel;
-    private javax.swing.JTable VehiclesList;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

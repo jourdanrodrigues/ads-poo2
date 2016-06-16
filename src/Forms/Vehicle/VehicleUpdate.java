@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Forms;
+package Forms.Vehicle;
 
 import Classes.Vehicle;
+import Forms.Login;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -367,8 +368,6 @@ public class VehicleUpdate extends javax.swing.JFrame {
     private javax.swing.JTextField ManufacturerTextField;
     private javax.swing.JTextField ModelTextField;
     private javax.swing.JLabel PhoneLabel;
-    private javax.swing.JTextField PriceTextField;
-    private javax.swing.JTextField PriceTextField1;
     private javax.swing.JLabel RGLabel;
     private javax.swing.JLabel TopLabel;
     private javax.swing.JButton UpdateButton;

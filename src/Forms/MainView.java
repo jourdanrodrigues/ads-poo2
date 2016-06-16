@@ -5,6 +5,15 @@
  */
 package Forms;
 
+import Forms.Promotion.PromotionRegister;
+import Forms.Promotion.PromotionList;
+import Forms.Vehicle.VehicleRegister;
+import Forms.Vehicle.VehicleList;
+import Forms.Employee.EmployeeRegister;
+import Forms.Employee.EmployeeList;
+import Forms.Client.ClientRegister;
+import Forms.Client.ClientList;
+
 /**
  *
  * @author jourdanrodrigues
