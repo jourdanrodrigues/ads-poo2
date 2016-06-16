@@ -60,8 +60,7 @@ public class Employee {
         String[] data = new String[2];
         
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Poo2Homework", "root", "");
+            Connection con = new DBConnection().getConnection();
             
             String query = "insert into Funcionario "
                     + "(nome, email, cpf, telefone, rg, endereco, login, senha, gerente, numeroPis)"
@@ -104,14 +103,14 @@ public class Employee {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Poo2Homework", "root", "");
 
             employeeName = employeeName.toLowerCase();
-            boolean withCode = !employeeName.isEmpty();
+            boolean withFilter = !employeeName.isEmpty();
 
             String query = "select * from Funcionario";
-            query += withCode ? " where lower(nome) like ?" : "";
+            query += withFilter ? " where lower(nome) like ?" : "";
 
             PreparedStatement stmt = con.prepareStatement(query);
 
-            if (withCode) stmt.setString(1, "%" + employeeName + "%");
+            if (withFilter) stmt.setString(1, "%" + employeeName + "%");
 
             return stmt.executeQuery();
 

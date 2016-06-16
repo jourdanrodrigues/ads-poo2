@@ -30,34 +30,36 @@
               <Component id="LogoutButton" min="-2" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <EmptySpace pref="22" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="ClientLabel" min="-2" max="-2" attributes="0"/>
-                  <Component id="VehicleLabel" min="-2" max="-2" attributes="0"/>
-                  <Component id="EmployeeLabel" min="-2" max="-2" attributes="0"/>
-                  <Component id="PromotionLabel" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                      <Component id="SearchClientsButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="SearchVehiclesButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="SearchPromotionButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="SearchEmployeesButton" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="RegisterClientButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="RegisterVehiclesButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="RegisterEmployeeButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="RegisterPromotionButton" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="22" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="TopLabel" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="ClientLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="EmployeeLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="PromotionLabel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="SearchClientsButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="SearchPromotionButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="SearchEmployeesButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="SearchVehiclesButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="VehicleLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="RegisterClientButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="RegisterEmployeeButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="RegisterPromotionButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="RegisterVehicleButton" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="TopLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -69,19 +71,13 @@
                   <Component id="LogoutButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="UserNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="TopLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <Component id="TopLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="SearchClientsButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="RegisterClientButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ClientLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="SearchVehiclesButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="RegisterVehiclesButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="VehicleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -90,6 +86,12 @@
                   <Component id="PromotionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="SearchVehiclesButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="RegisterVehicleButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="VehicleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="SearchEmployeesButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="RegisterEmployeeButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -158,12 +160,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RegisterClientButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="RegisterVehiclesButton">
+    <Component class="javax.swing.JButton" name="RegisterVehicleButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastrar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RegisterVehiclesButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RegisterVehicleButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="RegisterEmployeeButton">

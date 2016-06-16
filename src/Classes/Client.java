@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -55,8 +54,7 @@ public class Client {
         String[] data = new String[2];
         
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Poo2Homework", "root", "");
+            Connection con = new DBConnection().getConnection();
             
             String query = "insert into Cliente "
                     + "(nomeCompleto, email, cpf, telefone, rg, cidade, estado, cnh)"
@@ -91,23 +89,28 @@ public class Client {
         
     }
             
-    public static ResultSet getClientList(String clientName) throws SQLException{
+    public static void getClientList(String clientName, DefaultTableModel table) throws SQLException{
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Poo2Homework", "root", "");
 
             clientName = clientName.toLowerCase();
-            boolean withCode = !clientName.isEmpty();
+            boolean withFilter = !clientName.isEmpty();
 
             String query = "select * from Cliente";
-            query += withCode ? " where lower(nomeCompleto) like ?" : "";
+            query += withFilter ? " where lower(nomeCompleto) like ?" : "";
 
             PreparedStatement stmt = con.prepareStatement(query);
 
-            if (withCode) stmt.setString(1, "%" + clientName + "%");
+            if (withFilter) stmt.setString(1, "%" + clientName + "%");
 
-            return stmt.executeQuery();
+            ResultSet rs = stmt.executeQuery();
+            
+            table.setNumRows(0);
+
+            while (rs.next())
+                table.addRow(new Object[]{rs.getString("nomeCompleto")});
 
         } catch (SQLException | ClassNotFoundException ex) {
            throw new SQLException(ex.getMessage());

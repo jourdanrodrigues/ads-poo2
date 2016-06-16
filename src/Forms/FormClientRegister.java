@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Jourdan Rodrigues
+ * @author jourdanrodrigues
  */
 public class FormClientRegister extends javax.swing.JFrame {
     String userName;

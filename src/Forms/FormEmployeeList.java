@@ -66,9 +66,8 @@ public final class FormEmployeeList extends javax.swing.JFrame {
 
             employeesList.setNumRows(0);
 
-            while (rs.next()) {
+            while (rs.next())
                 employeesList.addRow(new Object[]{rs.getString("nome")});
-            }
 
         } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex.getMessage());

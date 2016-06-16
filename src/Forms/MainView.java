@@ -7,7 +7,7 @@ package Forms;
 
 /**
  *
- * @author Jourdan Rodrigues
+ * @author jourdanrodrigues
  */
 public class MainView extends javax.swing.JFrame {
     String userName;
@@ -32,6 +32,10 @@ public class MainView extends javax.swing.JFrame {
             EmployeeLabel.setVisible(false);
             SearchEmployeesButton.setVisible(false);
             RegisterEmployeeButton.setVisible(false);
+            
+            VehicleLabel.setVisible(false);
+            SearchVehiclesButton.setVisible(false);
+            RegisterVehicleButton.setVisible(false);
         }
     }
 
@@ -53,7 +57,7 @@ public class MainView extends javax.swing.JFrame {
         SearchEmployeesButton = new javax.swing.JButton();
         SearchPromotionButton = new javax.swing.JButton();
         RegisterClientButton = new javax.swing.JButton();
-        RegisterVehiclesButton = new javax.swing.JButton();
+        RegisterVehicleButton = new javax.swing.JButton();
         RegisterEmployeeButton = new javax.swing.JButton();
         RegisterPromotionButton = new javax.swing.JButton();
         TopLabel = new javax.swing.JLabel();
@@ -100,10 +104,10 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
-        RegisterVehiclesButton.setText("Cadastrar");
-        RegisterVehiclesButton.addActionListener(new java.awt.event.ActionListener() {
+        RegisterVehicleButton.setText("Cadastrar");
+        RegisterVehicleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegisterVehiclesButtonActionPerformed(evt);
+                RegisterVehicleButtonActionPerformed(evt);
             }
         });
 
@@ -140,26 +144,27 @@ public class MainView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LogoutButton))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ClientLabel)
-                    .addComponent(VehicleLabel)
-                    .addComponent(EmployeeLabel)
-                    .addComponent(PromotionLabel))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(SearchClientsButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(SearchVehiclesButton, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addComponent(SearchPromotionButton)
-                    .addComponent(SearchEmployeesButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ClientLabel)
+                            .addComponent(EmployeeLabel)
+                            .addComponent(PromotionLabel))
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(SearchClientsButton)
+                            .addComponent(SearchPromotionButton)
+                            .addComponent(SearchEmployeesButton)
+                            .addComponent(SearchVehiclesButton)))
+                    .addComponent(VehicleLabel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(RegisterClientButton)
-                    .addComponent(RegisterVehiclesButton)
                     .addComponent(RegisterEmployeeButton)
-                    .addComponent(RegisterPromotionButton))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(RegisterPromotionButton)
+                    .addComponent(RegisterVehicleButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(TopLabel)
@@ -171,23 +176,23 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LogoutButton)
                     .addComponent(UserNameLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TopLabel)
                 .addGap(17, 17, 17)
+                .addComponent(TopLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SearchClientsButton)
                     .addComponent(RegisterClientButton)
                     .addComponent(ClientLabel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SearchVehiclesButton)
-                    .addComponent(RegisterVehiclesButton)
-                    .addComponent(VehicleLabel))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SearchPromotionButton)
                     .addComponent(RegisterPromotionButton)
                     .addComponent(PromotionLabel))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SearchVehiclesButton)
+                    .addComponent(RegisterVehicleButton)
+                    .addComponent(VehicleLabel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SearchEmployeesButton)
@@ -204,12 +209,14 @@ public class MainView extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_SearchClientsButtonActionPerformed
 
-    private void RegisterVehiclesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterVehiclesButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RegisterVehiclesButtonActionPerformed
+    private void RegisterVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterVehicleButtonActionPerformed
+        new VehicleRegister(this.userName, this.isManager, "fromMainView").setVisible(true);
+        dispose();
+    }//GEN-LAST:event_RegisterVehicleButtonActionPerformed
 
     private void SearchVehiclesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchVehiclesButtonActionPerformed
-        // TODO add your handling code here:
+        new VehicleList(this.userName, this.isManager).setVisible(true);
+        dispose();
     }//GEN-LAST:event_SearchVehiclesButtonActionPerformed
 
     private void RegisterClientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterClientButtonActionPerformed
@@ -282,7 +289,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton RegisterClientButton;
     private javax.swing.JButton RegisterEmployeeButton;
     private javax.swing.JButton RegisterPromotionButton;
-    private javax.swing.JButton RegisterVehiclesButton;
+    private javax.swing.JButton RegisterVehicleButton;
     private javax.swing.JButton SearchClientsButton;
     private javax.swing.JButton SearchEmployeesButton;
     private javax.swing.JButton SearchPromotionButton;

@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Jourdan Rodrigues
+ * @author jourdanrodrigues
  */
 public class FormLogin extends javax.swing.JDialog {
 
