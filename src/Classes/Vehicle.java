@@ -151,6 +151,30 @@ public class Vehicle {
         }
         
     }
+    
+    public static boolean sold(int vehicleId) {
+        
+        try {
+            Connection con = DBConnection.getConnection();
+            
+            String query = "update Veiculo set vendido=1 where id=?";
+            
+            PreparedStatement stmt = con.prepareStatement(query);
+            
+            stmt.setInt(1, vehicleId);
+            
+            stmt.executeUpdate();
+            
+            stmt.close();
+            con.close();
+            
+            return true;
+            
+        }
+        catch (SQLException | ClassNotFoundException ex) {
+            return false;
+        }
+    }
             
     public static Map<String, String> getVehicle(String vehicleId) throws SQLException{
 
@@ -194,8 +218,9 @@ public class Vehicle {
             modelOrChassi = modelOrChassi.toLowerCase();
             boolean withFilter = !modelOrChassi.isEmpty();
 
-            String query = "select id, modelo, cor, chassi, preco from Veiculo";
-            query += withFilter ? " where lower(modelo) like ? or lower(chassi) like ?" : "";
+            String query = "select id, modelo, cor, chassi, preco from Veiculo"
+                    + " where vendido=0";
+            query += withFilter ? " and (lower(modelo) like ? or lower(chassi) like ?)" : "";
 
             PreparedStatement stmt = con.prepareStatement(query);
 

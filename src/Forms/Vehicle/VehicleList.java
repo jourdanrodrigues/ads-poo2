@@ -234,8 +234,13 @@ public final class VehicleList extends javax.swing.JFrame {
     }//GEN-LAST:event_ModelChassiFieldActionPerformed
 
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
-        new VehicleRegister(this.userName, this.isManager, this.employeeId, "fromVehicleList").setVisible(true);
-        dispose();
+        try {
+            new VehicleRegister(this.userName, this.isManager, this.employeeId, "fromVehicleList").setVisible(true);
+            dispose();
+        }
+        catch (ArrayIndexOutOfBoundsException ex) {
+            JOptionPane.showMessageDialog(null, "Selecione um veículo!");
+        }
     }//GEN-LAST:event_RegisterButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed

@@ -11,6 +11,7 @@ import Classes.Vehicle;
 import Forms.Login;
 import Forms.MainView;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -113,17 +114,20 @@ public final class CloseSale extends javax.swing.JFrame {
         BackButton = new javax.swing.JButton();
         TopLabel = new javax.swing.JLabel();
         CloseSaleButton = new javax.swing.JButton();
-        EndDateLabel = new javax.swing.JLabel();
+        PaymentFormLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         VehiclesList = new javax.swing.JTable();
         LogoutButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         ClientsList = new javax.swing.JTable();
         PaymentFormComboBox = new javax.swing.JComboBox<>();
-        EndDateLabel1 = new javax.swing.JLabel();
-        EndDateLabel2 = new javax.swing.JLabel();
+        ClientSearchLabel = new javax.swing.JLabel();
+        VehicleSearchLabel = new javax.swing.JLabel();
         VehicleTextField = new javax.swing.JTextField();
         ClientTextField = new javax.swing.JTextField();
+        AdditionalServicesLabel = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        AdditionalServicesTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -148,8 +152,8 @@ public final class CloseSale extends javax.swing.JFrame {
             }
         });
 
-        EndDateLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        EndDateLabel.setText("FORMA DE PAGAMENTO");
+        PaymentFormLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        PaymentFormLabel.setText("FORMA DE PAGAMENTO");
 
         VehiclesList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -192,6 +196,8 @@ public final class CloseSale extends javax.swing.JFrame {
                 {null, null},
                 {null, null},
                 {null, null},
+                {null, null},
+                {null, null},
                 {null, null}
             },
             new String [] {
@@ -225,11 +231,18 @@ public final class CloseSale extends javax.swing.JFrame {
             }
         });
 
-        EndDateLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        EndDateLabel1.setText("CLIENTE");
+        ClientSearchLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        ClientSearchLabel.setText("CLIENTE");
 
-        EndDateLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        EndDateLabel2.setText("SELECIONE O VEÍCULO (MODELO / CHASSI)");
+        VehicleSearchLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        VehicleSearchLabel.setText("SELECIONE O VEÍCULO (MODELO / CHASSI)");
+
+        AdditionalServicesLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        AdditionalServicesLabel.setText("SERVIÇOS ADICIONAIS");
+
+        AdditionalServicesTextArea.setColumns(20);
+        AdditionalServicesTextArea.setRows(5);
+        jScrollPane3.setViewportView(AdditionalServicesTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -242,29 +255,30 @@ public final class CloseSale extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LogoutButton))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(EndDateLabel2)
+                .addContainerGap(49, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(VehicleSearchLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(VehicleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
-                        .addComponent(CloseSaleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(VehicleTextField))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(TopLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(EndDateLabel1)
+                                    .addComponent(ClientSearchLabel)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(ClientTextField))
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(PaymentFormComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(EndDateLabel)))))
-                .addContainerGap(60, Short.MAX_VALUE))
+                                .addComponent(PaymentFormLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(AdditionalServicesLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane1)
+                    .addComponent(CloseSaleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,23 +288,27 @@ public final class CloseSale extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(LogoutButton)
                         .addComponent(UserNameLabel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(TopLabel)
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(EndDateLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PaymentFormComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(EndDateLabel1)
+                            .addComponent(ClientSearchLabel)
                             .addComponent(ClientTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(25, 25, 25)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(PaymentFormLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PaymentFormComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(AdditionalServicesLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(EndDateLabel2)
+                    .addComponent(VehicleSearchLabel)
                     .addComponent(VehicleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -313,6 +331,7 @@ public final class CloseSale extends javax.swing.JFrame {
             Map<String, String> map = new HashMap<>();
 
             map.put("paymentForm", PaymentFormComboBox.getSelectedItem().toString());
+            map.put("additionalServices", AdditionalServicesTextArea.getText());
             map.put("employeeId", String.valueOf(this.employeeId));
             
             try {
@@ -391,20 +410,23 @@ public final class CloseSale extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AdditionalServicesLabel;
+    private javax.swing.JTextArea AdditionalServicesTextArea;
     private javax.swing.JButton BackButton;
+    private javax.swing.JLabel ClientSearchLabel;
     private javax.swing.JTextField ClientTextField;
     private javax.swing.JTable ClientsList;
     private javax.swing.JButton CloseSaleButton;
-    private javax.swing.JLabel EndDateLabel;
-    private javax.swing.JLabel EndDateLabel1;
-    private javax.swing.JLabel EndDateLabel2;
     private javax.swing.JButton LogoutButton;
     private javax.swing.JComboBox<String> PaymentFormComboBox;
+    private javax.swing.JLabel PaymentFormLabel;
     private javax.swing.JLabel TopLabel;
     private javax.swing.JLabel UserNameLabel;
+    private javax.swing.JLabel VehicleSearchLabel;
     private javax.swing.JTextField VehicleTextField;
     private javax.swing.JTable VehiclesList;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }

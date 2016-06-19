@@ -29,7 +29,11 @@ public class ChoosePromotion extends javax.swing.JFrame {
     }
     
     public ChoosePromotion(String userName, int isManager, int employeeId, Map<String, String> data) {
+        this.userName = userName;
+        this.isManager = isManager;
+        this.employeeId = employeeId;
         this.data = data;
+        
         initComponents();
         
         try {
@@ -144,17 +148,23 @@ public class ChoosePromotion extends javax.swing.JFrame {
         try {
             data.put("promotionId", (String) PromotionsList.getModel().getValueAt(PromotionsList.getSelectedRow(), 0));
         }
-        catch (ArrayIndexOutOfBoundsException ex) {
-            JOptionPane.showMessageDialog(null, "Selecione um veículo!");
-            return;
+        catch (ArrayIndexOutOfBoundsException ex) {}
+        
+        try {
+            String [] operationResponse = new Sale(data).closeSale();
+
+            JOptionPane.showMessageDialog(null, operationResponse[1]);
+
+            if (operationResponse[0].equals("success")){
+                new MainView(this.userName, this.isManager, this.employeeId).setVisible(true);
+                dispose();
+            }
         }
-        String [] operationResponse = new Sale(data).closeSale();
-
-        JOptionPane.showMessageDialog(null, operationResponse[1]);
-
-        if (operationResponse[0].equals("success")){
-            new MainView(this.userName, this.isManager, this.employeeId).setVisible(true);
-            dispose();
+        catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro:\n" + ex.getMessage());
         }
     }//GEN-LAST:event_CloseSaleButtonActionPerformed
 

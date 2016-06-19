@@ -236,9 +236,14 @@ public final class ClientList extends javax.swing.JDialog {
     }//GEN-LAST:event_LogoutButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
-        String clientId = (String) ClientsList.getModel().getValueAt(ClientsList.getSelectedRow(), 0);
-        new ClientUpdate(this.userName, this.isManager, this.employeeId, clientId).setVisible(true);
-        dispose();
+        try {
+            String clientId = (String) ClientsList.getModel().getValueAt(ClientsList.getSelectedRow(), 0);
+            new ClientUpdate(this.userName, this.isManager, this.employeeId, clientId).setVisible(true);
+            dispose();
+        }
+        catch (ArrayIndexOutOfBoundsException ex) {
+            JOptionPane.showMessageDialog(null, "Selecione um cliente!");
+        }
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     /**

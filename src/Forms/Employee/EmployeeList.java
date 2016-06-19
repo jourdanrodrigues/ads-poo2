@@ -236,9 +236,14 @@ public final class EmployeeList extends javax.swing.JFrame {
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void EmployeeUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeUpdateButtonActionPerformed
-        String selectedEmployeeId = (String) EmployeesList.getModel().getValueAt(EmployeesList.getSelectedRow(), 0);
-        new EmployeeUpdate(this.userName, this.isManager, this.employeeId, selectedEmployeeId).setVisible(true);
-        dispose();
+        try {
+            String selectedEmployeeId = (String) EmployeesList.getModel().getValueAt(EmployeesList.getSelectedRow(), 0);
+            new EmployeeUpdate(this.userName, this.isManager, this.employeeId, selectedEmployeeId).setVisible(true);
+            dispose();
+        }
+        catch (ArrayIndexOutOfBoundsException ex) {
+            JOptionPane.showMessageDialog(null, "Selecione um funcionário!");
+        }
     }//GEN-LAST:event_EmployeeUpdateButtonActionPerformed
 
     /**
