@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 17-Jun-2016 às 01:25
+-- Generation Time: 19-Jun-2016 às 20:29
 -- Versão do servidor: 10.1.13-MariaDB
 -- PHP Version: 5.6.21
 
@@ -110,15 +110,16 @@ CREATE TABLE `Veiculo` (
   `cor` varchar(30) NOT NULL,
   `chassi` char(17) NOT NULL,
   `ano` int(11) NOT NULL,
-  `preco` float NOT NULL
+  `preco` float NOT NULL,
+  `vendido` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `Veiculo`
 --
 
-INSERT INTO `Veiculo` (`id`, `modelo`, `fabricante`, `cor`, `chassi`, `ano`, `preco`) VALUES
-(1, 'Gol', 'volkswagen', 'Azul Claro', '12345678912345678', 2014, 12400.1);
+INSERT INTO `Veiculo` (`id`, `modelo`, `fabricante`, `cor`, `chassi`, `ano`, `preco`, `vendido`) VALUES
+(1, 'Gol', 'volkswagen', 'Azul Claro', '12345678912345678', 2014, 12400.1, 1);
 
 -- --------------------------------------------------------
 
@@ -137,6 +138,13 @@ CREATE TABLE `Venda` (
   `servicos_adicionais` varchar(140) NOT NULL,
   `valor` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `Venda`
+--
+
+INSERT INTO `Venda` (`id`, `veiculo_id`, `funcionario_id`, `promocao_id`, `cliente_id`, `data`, `forma_pagamento`, `servicos_adicionais`, `valor`) VALUES
+(4, 1, 1, NULL, 1, '2016-06-19', 'Crédito', 'textão', 12400.1);
 
 --
 -- Indexes for dumped tables
@@ -205,7 +213,7 @@ ALTER TABLE `Veiculo`
 -- AUTO_INCREMENT for table `Venda`
 --
 ALTER TABLE `Venda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

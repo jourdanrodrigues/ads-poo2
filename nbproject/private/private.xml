@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/jourdanrodrigues/Documentos/ads/poo2/trabalho/src/Forms/MainView.java</file>
             <file>file:/home/jourdanrodrigues/Documentos/ads/poo2/trabalho/src/Forms/Sale/ChoosePromotion.java</file>
             <file>file:/home/jourdanrodrigues/Documentos/ads/poo2/trabalho/src/Forms/Sale/CloseSale.java</file>
-            <file>file:/home/jourdanrodrigues/Documentos/ads/poo2/trabalho/src/Classes/Promotion.java</file>
-            <file>file:/home/jourdanrodrigues/Documentos/ads/poo2/trabalho/src/Classes/Client.java</file>
-            <file>file:/home/jourdanrodrigues/Documentos/ads/poo2/trabalho/src/Classes/Sale.java</file>
             <file>file:/home/jourdanrodrigues/Documentos/ads/poo2/trabalho/src/Forms/Vehicle/VehicleList.java</file>
+            <file>file:/home/jourdanrodrigues/Documentos/ads/poo2/trabalho/src/Classes/Vehicle.java</file>
         </group>
     </open-files>
 </project-private>
