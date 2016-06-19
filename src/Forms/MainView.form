@@ -31,41 +31,39 @@
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace pref="60" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="EmployeeLabel" max="32767" attributes="0"/>
-                          <Component id="VehicleLabel" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="38" pref="38" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="SearchEmployeesButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="SearchVehiclesButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="SearchVehiclesButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="EmployeeLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="VehicleLabel" min="-2" pref="88" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="PromotionLabel" pref="88" max="32767" attributes="0"/>
+                                      <Component id="ClientLabel" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="SearchClientsButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="SearchPromotionButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="SearchEmployeesButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="RegisterEmployeeButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="RegisterVehicleButton" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Component id="CloseSaleButton" min="-2" pref="303" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="PromotionLabel" pref="88" max="32767" attributes="0"/>
-                          <Component id="ClientLabel" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="SearchClientsButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="SearchPromotionButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="RegisterClientButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="RegisterPromotionButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="RegisterClientButton" alignment="0" max="32767" attributes="0"/>
+                          <Component id="RegisterPromotionButton" alignment="0" max="32767" attributes="0"/>
+                          <Component id="RegisterEmployeeButton" max="32767" attributes="0"/>
+                          <Component id="RegisterVehicleButton" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="TopLabel" alignment="1" min="-2" pref="303" max="-2" attributes="0"/>
+                  <Component id="TopLabel" alignment="1" max="32767" attributes="0"/>
+                  <Component id="CloseSaleButton" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="60" max="32767" attributes="0"/>
           </Group>
@@ -96,11 +94,11 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="SearchVehiclesButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="RegisterVehicleButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SearchVehiclesButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="VehicleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="SearchEmployeesButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="RegisterEmployeeButton" alignment="3" min="-2" max="-2" attributes="0"/>
